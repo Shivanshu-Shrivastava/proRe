@@ -1,404 +1,274 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
+from django.http import HttpResponse
+from .forms import *
 from .models import *
+from .utils import render_to_pdf
+from django.template.loader import render_to_string
 
+person = Person.objects.last()
+
+try:
+    personId = Person.objects.last().id
+except AttributeError:
+    personId = 1
+
+forms = {
+              "person":PersonForm,
+              "edu": EducationForm,
+              "exp": ExperienceForm,
+              "skills": SkillsForm,
+              "projects": ProjectsForm,
+              "lang": LanguageForm,
+              "ach": AchievementsForm,
+              "hobby": HobbiesForm
+}
 
 # Create your views here.
-
-
-def get_input(request):
-    global e
-    list = []
-    # e=len(EducatModel.objects.all())
-    # print('###############:####',e)
-    if request.method == 'GET':
-        e = len(Person.objects.all())
-    if request.method == "POST":
-        new_name = request.POST.get("name")
-        new_email = request.POST.get("email")
-        new_phone = request.POST.get("phone")
-        new_github = request.POST.get("github")
-        new_linked = request.POST.get("linkedin")
-        new_dob = request.POST.get("dob")
-        new_address = request.POST.get("address")
-        Person.objects.create(full_name=new_name, email=new_email,
-                              phone=new_phone, dateob=new_dob,
-                              address=new_address, github=new_github
-                              , linkedin=new_linked)
-
-        objeedu = len(Person.objects.all())
-
-        total = objeedu - e
-        while total >= 1:
-            realedu = Person.objects.get(id=total + e)
-            list.append(realedu)
-
-            total -= 1
-        show = True
-        disable=True
-    else:
-        new_name = None
-        show = False
-        new_email = None
-        new_phone = None
-        new_github = None
-        new_linked = None
-        new_dob = None
-        new_address = None
-        disable = False
-
-    context = {
-        "name": new_name,
-        "email": new_email,
-        "phone": new_phone,
-        "github": new_github,
-        "linked": new_linked,
-        "dob": new_dob,
-        "address": new_address,
-        "show": show,
-        "list":list,
-        'disable':disable
-
-    }
-
-    # print('//////////')
-    # print(request.POST)
-    return render(request, "resume_maker/getinput.html", context)
-
-
 def render_page(request):
-    global e
-    objepersonal = Person.objects.all()
-    c = len(objepersonal)
-    realper = Person.objects.get(id=c)
-    # EducatMOdel
-    objeedu = EducatModel.objects.all()
-    e = len(objeedu)
-    print('3###########', e)
-    realedu = EducatModel.objects.get(id=e)
-    # work COde
-    objework = workModel.objects.all()
-    w = len(objework)
-    realwork = workModel.objects.get(id=w)
-    # position
-    objepos = posModel.objects.all()
-    p = len(objepos)
-    realpos = posModel.objects.get(id=p)
-    # proition
-    objepro = proModel.objects.all()
-    pr = len(objepro)
-    realpro = proModel.objects.get(id=pr)
-    # academic
-    objeaca = acaModel.objects.all()
-    ac = len(objeaca)
-    realaca = acaModel.objects.get(id=ac)
-    # extra
-    objextra = extraModel.objects.all()
-    ob = len(objextra)
-    realextra = extraModel.objects.get(id=ob)
+    person = Person.objects.last()
+    education = Education.objects.filter(person = person)
+    exp = Experience.objects.filter(person=person)
+    skill = SkillSet.objects.filter(person=person)
+    prjct = Projects.objects.filter(person=person)
+    ach = Achievements.objects.filter(person=person)
 
     context = {
-        "name": realper.full_name,
-        "email": realper.email,
-        "phone": realper.phone,
-        "address": realper.address,
-        'dob': realper.dateob,
-        'github': realper.github,
-        'linked': realper.linkedin,
-        "degree": realedu.degree,
-        'syear': realedu.start_yr,
-        'eyear': realedu.end_yr,
-        'institute': realedu.institute,
-        'score': realedu.score,
-        'profile': realwork.profile,
-        'title': realwork.title,
-        'description': realwork.description,
-        'first': realpos.first,
-        'last': realpos.last,
-        'handle': realpos.handle,
-        'project': realpro.project,
-        'industrial': realpro.industrial,
-        'projlink': realpro.projlink,
-        'academic': realaca.academic,
-        'extra': realextra.extra,
-
+        "person": person,
+        "education": education,
+        "exp": exp,
+        "skill": skill,
+        "prjct": prjct,
+        "lang": Languages,
+        "ach": ach,
+        "hobb": Hobbies,
     }
 
-    return render(request, "resume_maker/site.html", context)
+    return render(request,"site.html",context)
 
 
-def edu(request):
-    global e
-    list = []
-    # e=len(EducatModel.objects.all())
-    # print('###############:####',e)
-    if request.method == 'GET':
-        e = len(EducatModel.objects.all())
+def personal_det(request):
+    return render(request,"getinput.html", { "person":PersonForm})
 
+first = True
+def get_input(request):
+    global first
+    person = Person.objects.last()
+    #person = Person.objects.get()
+    print(person)
+    print(request.method)
     if request.method == "POST":
-        checkloo = True
+        form = PersonForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            first_name = cd.get('first_name')
+            middle_name = cd.get('middle_name')
+            last_name = cd.get('last_name')
+            email = cd.get('email')
+            mobile_no = cd.get('mobile_no')
+            age = cd.get('age')
+            dob = cd.get('dob')
+            address = cd.get('address')
+            github = cd.get('github')
+            linkedin = cd.get('linkedin')
+            website = cd.get('website')
 
-        new_degree = request.POST.get('degree')
-        new_syear = request.POST.get('syear')
-        new_eyear = request.POST.get('eyear')
-        new_score = request.POST.get('score')
-        new_institute = request.POST.get('institute')
-        EducatModel.objects.create(degree=new_degree, start_yr=new_syear,
-                                   end_yr=new_eyear, score=new_score,
-                                   institute=new_institute)
-        objeedu = len(EducatModel.objects.all())
+            data = Person(first_name = first_name, middle_name = middle_name, last_name = last_name, email = email, mobile_no = mobile_no, age = age, dob = dob, address = address, github= github, linkedin = linkedin, website= website)
+            temp = Person.objects.filter(first_name = first_name, middle_name = middle_name, last_name = last_name, email = email, mobile_no = mobile_no, age = age, dob = dob, address = address, github= github, linkedin = linkedin, website= website)
 
-        total = objeedu - e
-        while total >= 1:
-            realedu = EducatModel.objects.get(id=total + e)
-            list.append(realedu)
+            if temp.exists():
+                temp.update(first_name = first_name, middle_name = middle_name, last_name = last_name, email = email, mobile_no = mobile_no, age = age, dob = dob, address = address, github= github, linkedin = linkedin, website= website)
+            else:
+                form.save()
 
-            total -= 1
-
-        show = True
-        save = ' Next'
-
-
-
+            #form = PersonForm()
+            first = False
+            return render(request,"getinput.html",{"form":form,"person":form.cleaned_data,"show":first})
     else:
-        save = 'Skip'
+        form = PersonForm()
+    return render(request, "getinput.html",{"form":form,"show":first,"person":person})
 
-        checkloo = False
-        new_degree = None
-        new_syear = None
-        new_eyear = None
-        new_score = None
-        new_institute = None
-        show = False
-        education = None
+def edu(request,id = None):
+    person = Person.objects.last()
+    show = True
+    edu= Education.objects.filter(person = person)
+        #form = EducationForm(instance = )
+    if request.method == "POST":
+        if id:
+            delete = Education.objects.get(id = id)
+            delete.delete()
+        else:
+            form = EducationForm(request.POST or None)
+            if form.is_valid():
+                cd = form.cleaned_data
+                qualification = cd.get('qualification')
+                institution = cd.get('institution')
+                board = cd.get('board')
+                start_yr = cd.get('start_yr')
+                end_yr = cd.get('end_yr')
+                cgpa = cd.get('cgpa')
+                percent = cd.get('percent')
 
-    print(list)
-    context = {
-        'checkloo': checkloo,
-        'degree': new_degree,
-        'score': new_score,
-        'syear': new_syear,
-        'eyear': new_eyear,
-        'institute': new_institute,
-        "show": show,
-        'save': save,
-        # 'education':education,
-        'list': [l for l in list],
+                data = Education(qualification = qualification, institution = institution, board = board, start_yr = start_yr, end_yr = end_yr, cgpa = cgpa, percent = percent,person = person)
 
-    }
+                temp = Education.objects.filter(qualification = qualification, institution = institution, board = board, start_yr = start_yr, end_yr = end_yr, cgpa = cgpa, percent = percent,person = person)
 
-    return render(request, "resume_maker/Education.html", context)
-
+                if temp.exists():
+                    temp.update(qualification = qualification, institution = institution, board = board, start_yr = start_yr, end_yr = end_yr, cgpa = cgpa, percent = percent,person = person)
+                else:
+                    data.save()
+        form = EducationForm()
+        show = True
+        return render(request,"Education.html",{"edu":form,"data":edu,"show":show})
+    else:
+        form = EducationForm()
+    return render(request,"Education.html",{"edu":form,"data":edu,"show":show})
 
 def wor(request):
-    global e
-    list = []
-    # e=len(EducatModel.objects.all())
-    # print('###############:####',e)
-    if request.method == 'GET':
-        e = len(workModel.objects.all())
+    person = Person.objects.last()
+    print(person)
+    show = True
+    exp = Experience.objects.filter(person = person)
     if request.method == "POST":
-        save = 'Next'
-        new_profile = request.POST.get('profile')
-        new_title = request.POST.get('title')
-        new_description = request.POST.get('description')
-        workModel.objects.create(profile=new_profile, title=new_title,
-                                 description=new_description)
-        objeedu = len(workModel.objects.all())
+        form = ExperienceForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            type = cd.get('type')
+            company = cd.get('company')
+            role = cd.get('role')
+            join_dt = cd.get('join_dt')
+            left_dt = cd.get('left_dt')
+            details = cd.get('details')
 
-        total = objeedu - e
-        while total >= 1:
-            realedu = workModel.objects.get(id=total + e)
-            list.append(realedu)
-            total -= 1
+            data = Experience(type = type,company = company,role = role, join_dt = join_dt, left_dt = left_dt, details = details, person = person)
+            temp = Experience.objects.filter(type = type,company = company,role = role, join_dt = join_dt, left_dt = left_dt, details = details, person = person)
+            # try:
+            if temp.exists():
+                temp.update(type = type,company = company,role = role, join_dt = join_dt, left_dt = left_dt, details = details, person = person)
+            else:
+                data.save()
 
+            show = True
+
+            form = ExperienceForm()
+            print(exp)
+
+            return render(request,"work.html",{"exp":form,"data":exp,"show":show})
     else:
-        save = 'Skip'
-        new_profile = None
-        new_title = None
-        new_description = None
-    # print('/////////')
-    # print(new_profile)
-    # print(request.POST)
-    lasteedu = len(workModel.objects.all())
-    last=workModel.objects.last()
-    print('@@@@@',last,lasteedu)
-    context = {
-        'Save': save,
-        'profile': new_profile,
-        'title': new_profile,
-        'descripton': new_description,
-        'list': list
-    }
-    return render(request, "resume_maker/work.html", context)
+        form = ExperienceForm()
+    return render(request,"work.html",{"exp" : form,"show":show,"data":exp})
 
-
-def pos(request):
-    global e
-    list = []
-    # e=len(EducatModel.objects.all())
-    # print('###############:####',e)
-    if request.method == 'GET':
-        e = len(posModel.objects.all())
+def skill(request):
+    show = True
+    person = Person.objects.last()
+    skills = SkillSet.objects.filter(person = person)
     if request.method == "POST":
-        save = 'Next'
-        new_first = request.POST.get('first')
-        new_last = request.POST.get('last')
-        new_handle = request.POST.get('handle')
-        posModel.objects.create(first=new_first, last=new_last,
-                                handle=new_handle)
-        objeedu = len(posModel.objects.all())
+        form = SkillsForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            skill = cd.get('skill')
+            exp = cd.get('experience')
+            show = True
+            data = SkillSet(skill = skill,experience = exp,person = person)
+            temp = SkillSet.objects.filter(skill = skill,experience = exp,person = person)
+            if temp.exists():
+                temp.update(skill = skill,experience = exp,person = person)
+            else:
+                data.save()
 
-        total = objeedu - e
-        while total >= 1:
-            realedu = posModel.objects.get(id=total + e)
-            list.append(realedu)
-            total -= 1
+            form = SkillsForm()
+
+            return render(request,"skillset.html",{"skill":form,"data":skills,"show":show})
     else:
-        save = 'Skip'
-        new_first = None
-        new_last = None
-        new_handle = None
-
-    # print('#####')
-    # print(save)
-    context = {
-        'pos_save': save,
-        'first': new_first,
-        'last': new_last,
-        'handle': new_handle,
-        'list': list
-    }
-    return render(request, "resume_maker/position.html", context)
-
+        form = SkillsForm()
+    return render(request,"skillset.html", { "skill": form,"show":show,"data":skills})
 
 def pro(request):
-    global e
-    list = []
-    # e=len(EducatModel.objects.all())
-    # print('###############:####',e)
-    if request.method == 'GET':
-        e = len(proModel.objects.all())
+    show =True
+    person = Person.objects.last()
+    prjcts = Projects.objects.filter(person = person)
     if request.method == "POST":
-        save = 'Next'
-        new_project = request.POST.get('project')
-        new_industrial = request.POST.get('industrial')
-        new_projlink = request.POST.get('projlink')
-        proModel.objects.create(project=new_project, industrial=new_industrial,
-                                projlink=new_projlink)
-        objeedu = len(proModel.objects.all())
+        form = ProjectsForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            project = cd.get('project')
+            start_dt = cd.get('start_dt')
+            end_dt = cd.get('end_dt')
+            running = cd.get('running')
+            project_link = cd.get('project_link')
 
-        total = objeedu - e
-        while total >= 1:
-            realedu = proModel.objects.get(id=total + e)
-            list.append(realedu)
-            total -= 1
+            data = Projects(project = project, start_dt = start_dt, end_dt = end_dt,running = running, project_link = project_link, person = person)
+
+            temp = Projects.objects.filter(project = project, start_dt = start_dt, end_dt = end_dt,running = running, project_link = project_link, person = person)
+            if temp.exists():
+                temp.update(project = project, start_dt = start_dt, end_dt = end_dt,running = running, project_link = project_link, person = person)
+            else:
+                data.save()
+
+            form = ProjectsForm()
+
+            show = True
+
+            return render(request,"project.html",{"prjct":form,"data":prjcts,"show":show})
     else:
-        save = 'Skip'
-        new_project = None
-        new_industrial = None
-        new_projlink = None
+        form = ProjectsForm()
+    return render(request,"project.html", {"prjct": form,"show":show,"data":prjcts})
 
-    context = {
-        'pro_save': save,
-        'project': new_project,
-        'industrial': new_industrial,
-        'projlink': new_projlink,
-        'list': list
-    }
-    return render(request, "resume_maker/project.html", context)
-
-
-def aca(request):
-    global e
-    list = []
-    # e=len(EducatModel.objects.all())
-    # print('###############:####',e)
-    if request.method == 'GET':
-        e = len(acaModel.objects.all())
+def lang(request):
     if request.method == "POST":
-        save = 'Next'
-        new_academic = request.POST.get('academic')
-        acaModel.objects.create(academic=new_academic)
-        objeedu = len(acaModel.objects.all())
-
-        total = objeedu - e
-        while total >= 1:
-            realedu = acaModel.objects.get(id=total + e)
-            list.append(realedu)
-            total -= 1
-
+        form = LanguageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request,"languages.html",{"lang":form,"data":form.cleaned_data})
     else:
-        save = 'Skip'
-        new_academic = None
-
-    context = {
-        'aca_save': save,
-        'academic': new_academic,
-        'list': list
-    }
-    return render(request, "resume_maker/academic.html", context)
-
+        form = LanguageForm()
+    return render(request,"languages.html", { "lang": form })
 
 def ext(request):
-    global e
-    list = []
-    # e=len(EducatModel.objects.all())
-    # print('###############:####',e)
-    if request.method == 'GET':
-        e = len(extraModel.objects.all())
+    show = True
+    person = Person.objects.last()
+    ach = Achievements.objects.filter(person = person)
     if request.method == "POST":
-        save = 'Show my Resume'
-        new_extra = request.POST.get('extra')
-        extraModel.objects.create(extra=new_extra)
-        objeedu = len(extraModel.objects.all())
+        form = AchievementsForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            achievement= cd.get('achievement')
 
-        total = objeedu - e
-        while total >= 1:
-            realedu = extraModel.objects.get(id=total + e)
-            list.append(realedu)
-            total -= 1
+            data = Achievements(achievement = achievement,person = person)
+            temp = Achievements.objects.filter(achievement = achievement,person = person)
+            if temp.exists():
+                temp.update(achievement = achievement,person = person)
+            else:
+                data.save()
+            show = True
 
+            form = AchievementsForm()
 
+            return render(request,"extra.html",{"ach":form,"data":ach, "show":show})
     else:
-        save = 'Skip and Show my Resume'
-        new_extra = None
-    # print('#####')
-    # print(save)
-    context = {
-        'show_resume': save,
-        'extra': new_extra,
-        'list': list
-    }
-    return render(request, "resume_maker/extra.html", context)
+        form = AchievementsForm()
+    return render(request,"extra.html", { "ach" : form, "show":show,"data":ach})
 
-def add(request):
-    global e
-    list = []
-    # e=len(EducatModel.objects.all())
-    # print('###############:####',e)
-    if request.method == 'GET':
-        e = len(additional.objects.all())
-    if request.method == "POST":
-        save = 'Show My Resume'
-        new_additi = request.POST.get('additi')
-        additional.objects.create(add=new_additi)
-        objeedu = len(additional.objects.all())
+def get_pdf(request):
+    pass
 
-        total = objeedu - e
-        while total >= 1:
-            realedu = additional.objects.get(id=total + e)
-            list.append(realedu)
-            total -= 1
+    """content = Person.objects.last()
+
+    pdf = render_to_pdf("site.html")
+
+    return HttpResponse(pdf, content_type = "application/pdf")
+
+    return render_to_pdf(
+            "site.html",
+            {
+                "pagesize":"A4",
+                "data": content,
+            })"""
+
+    """html_string = render_to_string('site.html')
+    
+    html = HTML(string = html_string)
+
+    html.write_pdf(target = 'resume.pdf')"""
 
 
-    else:
-        save = 'Skip and Show my Resume'
-        new_additi = None
-    # print('#####')
-    # print(save)
-    context = {
-        'show_resume': save,
-        'additi': new_additi,
-        'list': list
-    }
-    return render(request, "resume_maker/additi.html", context)
+

@@ -1,59 +1,110 @@
 from django.db import models
 
-
 # Create your models here.
 class Person(models.Model):
-    full_name = models.CharField(max_length=25)
-
+    id = models.AutoField(primary_key = True)
+    first_name = models.CharField(max_length=25)
+    middle_name = models.CharField(max_length=25,null =True, blank = True)
+    last_name = models.CharField(max_length=25)
     email = models.EmailField()
-    phone = models.IntegerField()
-    dateob = models.CharField(max_length=25)
+    mobile_no = models.IntegerField()
+    age = models.IntegerField()
+    dob = models.DateField()
     address = models.TextField()
-    github = models.URLField(blank=True)
-    linkedin = models.URLField(blank=True)
+    github = models.URLField(blank=True, null=True)
+    linkedin = models.URLField(blank=True, null= True)
+    website = models.URLField(blank=True,null = True)
+
+    def full_name(self):
+        return " ".join([self.first_name, self.middle_name, self.last_name])
+
+    def __str__(self):
+        return self.first_name
+
+class Education(models.Model):
+    Degrees = (
+        ('PhD','PhD'),
+        ('Masters','Masters'),
+        ('Bachelors','Bachelors'),
+        ('High School','High School')
+    )
+    Status = (
+        ('Pursuing','Pursuing'),
+        ('Completed','Completed')
+    )
+    person = models.ForeignKey(Person,on_delete=models.CASCADE)
+    qualification = models.CharField(choices=Degrees,max_length=25)
+    status = models.CharField(choices = Status, max_length = 25)
+    institution = models.CharField(max_length=75)
+    board = models.CharField(max_length=75)
+    start_yr = models.DateField()
+    end_yr = models.DateField()
+    cgpa = models.FloatField(blank=True,null=True)
+    percent = models.FloatField(blank=True, null=True)
+
+    def __str__(self):
+        return self.institution
+
+class Experience(models.Model):
+    types = [
+        ('Job','Job'),
+        ('Internship','Internship')
+    ]
+    person = models.ForeignKey(Person,on_delete=models.CASCADE)
+    type = models.CharField(choices = types,max_length = 35)
+    company = models.CharField(max_length=150)
+    role = models.CharField(max_length = 270)
+    join_dt = models.DateField()
+    left_dt = models.DateField(null = True,blank = True)
+    current = models.BooleanField(default = False)
+    details = models.TextField()
+
+    def __str__(self):
+        return self.company
+
+class SkillSet(models.Model):
+    levels = [
+        ('Beginner','Beginner'),
+        ('Intermediate','Intermediate'),
+        ('Advanced','Advanced')
+    ]
+    person = models.ForeignKey(Person,on_delete=models.CASCADE)
+    skill = models.CharField(max_length=25)
+    experience = models.CharField(choices = levels,max_length = 25)
 
 
-class EducatModel(models.Model):
-    degree = models.CharField(max_length=25,null=True)
+    def __str__(self):
+        return self.skill
 
-    start_yr = models.CharField(max_length=25)
-    end_yr = models.CharField(max_length=25)
-    institute = models.CharField(max_length=25)
-    score=models.IntegerField()
+class Projects(models.Model):
+    person = models.ForeignKey(Person,on_delete=models.CASCADE)
+    project = models.CharField(max_length=150)
+    start_dt = models.DateField()
+    end_dt = models.DateField(null = True,blank = True)
+    running = models.BooleanField(default = False)
+    project_link = models.URLField(blank=True,null=True)
 
-    # def __iter__(self):
-    #     return [self.degree,
-    #             self.start_yr,
-    #             self.end_yr,
-    #             self.institute,
-    #             self.score,
-    #             ]
+    def __str__(self):
+        return self.project
 
-class workModel(models.Model):
-    profile = models.CharField(max_length=88)
-    title = models.CharField(max_length=88)
-    description = models.CharField(max_length=250)
+class Languages(models.Model):
+    person = models.ForeignKey(Person,on_delete=models.CASCADE)
+    language = models.CharField(max_length=25)
 
-class posModel(models.Model):
-    first = models.CharField(default="Empty",blank=True,null=True, max_length=88)
-    last = models.CharField(default="Empty",blank=True,null=True, max_length=88)
-    handle = models.CharField(default="Empty",blank=True,null=True, max_length=250)
+    def __str__(self):
+        return self.language
 
-class proModel(models.Model):
-    project=models.CharField(max_length=80)
-    industrial=models.CharField(max_length=80)
-    projlink=models.URLField(blank=True,null=True)
+class Achievements(models.Model):
+    person = models.ForeignKey(Person,on_delete=models.CASCADE)
+    achievement = models.TextField()
 
-class acaModel(models.Model):
-    academic = models.CharField(max_length=250)
+    def __str__(self):
+        return self.achievement
 
-class extraModel(models.Model):
-    extra = models.CharField(max_length=250)
+class Hobbies(models.Model):
+    person = models.ForeignKey(Person,on_delete=models.CASCADE)
+    hobby = models.CharField(max_length=150)
 
-
-class additional(models.Model):
-    add = models.CharField(max_length=250)
-
-
-
+    def __str__(self):
+        return self.hobby
 
