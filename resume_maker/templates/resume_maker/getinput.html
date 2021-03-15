@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
 
@@ -10,328 +11,376 @@
     <!-- Bootstrap CSS -->
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" rel="stylesheet">
-    <link href="{% static "resume_maker/style.css" %}" rel="stylesheet">
+    <link href="{% static 'resume_maker/style.css' %}" rel="stylesheet">
 
-    <title>Resume</title>
+    <title>Protrainy Resume Builder</title>
 </head>
 <body style="min-width: 420px">
 
 <header>
     <!-- Image and text -->
     <!-- Just an image -->
-    <nav class="navbar navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand mx-auto" href="#">
-                <img  src="{% static "resume_maker/images/wha.jpeg" %}" width="150" height="30" alt="">
-            </a></div>
+    <nav class="navbar navbar-light bg-light  d-flex justify-content-between">
+
+        <a class="navbar-brand ml-5" href="#">
+            <img src="{% static "resume_maker/images/wha.jpeg" %}" width="150" height="30" alt="">
+        </a>
+        <h3 class="family mr-5">Free CV Builder</h3>
+
     </nav>
 
 </header>
-
-<div class="container my-5  px-5 ">
-    <div class="progress  " id="movebar">
-        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50"
-             class="progress-bar linergra py-2" role="progressbar" style="width:15%">
-            <span class="font-weight-bold text-light py-3">15%</span>
+<main class="row">
+    <aside class="my-5 ml-2 col-md-3 sidebar  col-sm-12">
+        <div class="list-group whitesm">
+            <a href="#" style="color: black" class="whitesm list-group-item list-group-item-action">
+                <h5>Free CV Builder</h5>
+            </a>
+            <a href="getinput" style="background-color:  rgba(160,87,20,1)" class=" whitesm list-group-item ">
+                <span class="ml-3 sidecol text-justify">Personal Details</span>
+            </a>
+            <a href="education" class="whitesm list-group-item text-justify"><span style="color: black" class="ml-3">Education Details</span></a>
+            <a href="work" class="whitesm list-group-item text-justify"><span style="color: black" class="ml-3">Work Experiance</span></a>
+            <a href="skills" class="whitesm list-group-item text-justify "><span style="color: black"
+                                                                                        class="ml-3">Skill</span></a>
+            <a href="project" class="whitesm list-group-item text-justify "><span style="color: black"
+                                                                                       class="ml-3">Projects</span></a>
+            <a href="extra" class="whitesm list-group-item text-justify "><span style="color: black"
+                                                                                     class="ml-3">Acadmic Achievents and Awards</span></a>
         </div>
-    </div>
-</div>
-<div class="container">
-    <div class="shadow p-2 bg-white rounded m-4 bg-lggr d-flex flex-wrap  justify-content-center linergra">
-        <h3 class="m-2 text-center font-weight-bold  family">Personal Details</h3>
-    </div>
-    <hr class="mx-auto linergra"/>
-
-    {% if request.method == 'POST' %}
-        {% with count=1 %}
-
-
-{#                            {{ count|add:'1' }}#}
-                <div class="alert alert-warning" role="alert">
-                    <div class="d-flex justify-content-around flex-wrap ">
-                        <div class="d-flex flex-column justify-content-between flex-wrap ">
-                            <h6 class="text-capitalize">Name</h6>
-                            <h6 class="text-capitalize">Email</h6>
-                            <h6 class="text-capitalize">Date Of Birth</h6>
-                            <h6 class="text-capitalize">Address</h6>
-                            <h6 class="text-capitalize">Phone NO.</h6>
-                            {% if not github == '' %}
-                            <h6 class="text-capitalize">Github ID</h6>
-                            {% endif %}
-                            {% if not linkedin == '' %}
-                            <h6 class="text-capitalize">LinkedIn ID</h6>
-                            {% endif %}
-                        </div>
-                        <div class="d-flex flex-column justify-content-between flex-wrap ">
-                            <h6 class=" text-capitalize">{{ name }}</h6>
-                            <h6 class="">{{ email }}</h6>
-                            <h6 class="">{{ dob }}</h6>
-                        <h6 class="">{{ address }}</h6>
-                        {% if not phone == '' %}
-                        <h6 class="">{{ phone }}</h6>
-                        {% endif %}
-                            {% if not github == '' %}
-                            <a href="{{ github }}" class="resumelink" target="_blank"> <h6 class="">{{ github }}</h6></a>
-                            {% endif %}
-                           {% if not linkedin == '' %}
-                            <a href="{{ linkedin }}" class="resumelink" target="_blank"><h6 class="">{{ linked }}</h6></a>
-                            {% endif %}
-                        </div>
-                        <div class="d-flex flex-column flex-wrap my-4" style="max-width: 200px">
-                            {#                <button class="mx-3  " data-target="#exampleModalCenter{{ count }}"#}
-                            {#                        data-toggle="modal" style="border-radius: 4rem;"#}
-                            {#                        type="button">#}
-                            <svg data-toggle="modal" data-target="#exampleModalCenter{{ count }}"
-                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                 class="bi bi-pencil-square " viewBox="0 0 16 16">
-                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                <path fill-rule="evenodd"
-                                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                            </svg>
-                            {#                </button>#}
-                            {#                <button class="mx-3 " data-target="#exampleModalCentererse{{ count }}"#}
-                            {#                        data-toggle="modal" style="border-radius: 4rem;"#}
-                            {#                        type="button" onclick="erasedata()">#}
-                            <a class="resumelink" href="{{request.META.HTTP_REFERER|escape}}">
-                            <svg
-                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                 class="bi bi-trash mt-3" viewBox="0 0 16 16">
-                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                <path fill-rule="evenodd"
-                                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                            </svg></a>
-                            {#                </button>#}
-                        </div>
-                    </div>
+    </aside>
+    <section class="col-md-7 my-4 col-sm-12">
+        {#<div class="container my-5  px-5">#}
+        {#    <div class="progress  " id="movebar">#}
+        {#        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50"#}
+        {#             class="progress-bar linergra py-2" role="progressbar" style="width:15%">#}
+        {#            <span class="font-weight-bold text-light py-3">15%</span>#}
+        {#        </div>#}
+        {#    </div>#}
+        {#</div>#}
+    {% block content %}
+            <div class="container">
+                <div class="shadow p-2 bg-white rounded m-4 bg-lggr d-flex flex-wrap  justify-content-center linergra">
+                    <h3 class="m-2 text-center font-weight-bold  family">Personal Details</h3>
                 </div>
+                <hr class="mx-auto linergra"/>
 
 
+                    {% with count=1 %}
 
 
+                        {#                            {{ count|add:'1' }}#}
+                        <div class="alert alert-warning" role="alert">
+                            <div class="d-flex justify-content-around flex-wrap ">
+                                <div class="d-flex flex-column justify-content-between flex-wrap ">
+                                    <h6 class="text-capitalize">Name</h6>
+                                    <h6 class="text-capitalize">Email</h6>
+                                    <h6 class="text-capitalize">Date Of Birth</h6>
+                                    <h6 class="text-capitalize">Address</h6>
+                                    <h6 class="text-capitalize">Phone NO.</h6>
+                                    {% if not github == '' %}
+                                        <h6 class="text-capitalize">Github ID</h6>
+                                    {% endif %}
+                                    {% if not linked == '' %}
+                                        <h6 class="text-capitalize">LinkedIn ID</h6>
+                                    {% endif %}
+                                </div>
+                                <div class="d-flex flex-column justify-content-between flex-wrap ">
+                                    <h6 class=" text-capitalize">{{ person.first_name }} {{ person.middle_name }} {{ person.last_name }}</h6>
+                                    <h6 class="">{{ person.email }}</h6>
+                                    <h6 class="">{{ person.dob }}</h6>
+                                    <h6 class="">{{ person.address }}</h6>
+                                    <h6 class="">{{ person.mobile_no }}</h6>
 
+                                    {% if person.github != None %}
+                                        <a href="{{ person.github }}" class="resumelink" target="_blank"><h6
+                                                class="">{{ person.github }}</h6></a>
+                                    {% endif %}
+                                    {% if person.linkedin != None %}
+                                        <a href="{{ person.linkedin }}" class="resumelink" target="_blank"><h6
+                                                class="">{{ person.linkedin }}</h6></a>
+                                    {% endif %}
+                                    {% if person.website != None %}
+                                        <a href="{{ person.website }}" class="resumelink" target="_blank"><h6
+                                                class="">{{ person.website }}</h6></a>
+                                    {% endif %}
 
-                <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade mow"
-                     id="exampleModalCenter{{ count }}"
-                     role="dialog" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content ">
-                            <div class="modal-header whitesm ">
-                                <h5 class="modal-title " id="exampleModalCenterTitle">Personal Details</h5>
-                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                </div>
+                                <div class="d-flex flex-column flex-wrap my-4" style="max-width: 200px">
+                                    {#                <button class="mx-3  " data-target="#exampleModalCenter{{ count }}"#}
+                                    {#                        data-toggle="modal" style="border-radius: 4rem;"#}
+                                    {#                        type="button">#}
+                                    <!--<svg data-toggle="modal" data-target="#exampleModalCenter{{ count }}"
+                                         xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                         class="bi bi-pencil-square " viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                    {#                </button>#}
+                                    {#                <button class="mx-3 " data-target="#exampleModalCentererse{{ count }}"#}
+                                    {#                        data-toggle="modal" style="border-radius: 4rem;"#}
+                                    {#                        type="button" onclick="erasedata()">#}
+                                    <a class="resumelink" href="{{ request.META.HTTP_REFERER|escape }}">
+                                        <svg
+                                                xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor"
+                                                class="bi bi-trash mt-3" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                        </svg>
+                                    </a>-->
+                                    {#                </button>#}
+                                </div>
                             </div>
-                            <div class="modal-body whitesm ">
-                                <div class="container shadow-sm  rounded whitesm  mx-auto">
-                                     <form class="d-flex flex-column flex-wrap " method="post">{% csrf_token %}
-                                <div class="form-group mx-5">
-                                    <label class=" family" for="exampleFormControlInput1">Name</label>
-                                    <input value="{{ name }}" class="form-control inputt whitesm" id="exampleFormControlInput1" name="name"
-                                           placeholder="Full Name" required
-                                           type="text">
-                                </div>
-                                <div class="form-group mx-5">
-                                    <label class=" family" for="exampleFormControlInput1">Email</label>
-                                    <input value="{{ email }}" class="form-control inputt whitesm" id="exampleFormControlInput1"
-                                           name="email"
-                                           placeholder="email@example.com" required
-                                           type="email">
-                                </div>
-                                <div class="form-group mx-5">
-                                    <label class=" family" for="exampleFormControlInput1">Date Of
-                                        Birth</label>
-                                    <input value="{{ dob }}" class="form-control inputt whitesm" id="exampleFormControlInput1" name="dob"
-                                           placeholder="" required
-                                           type="date">
-                                </div>
+                        </div>
 
 
-                                <div class="form-group mx-5">
-                                    <label class=" family"
-                                           for="exampleFormControlInput1">Address</label>
-                                    <input value="{{ address }}" class="form-control inputt whitesm " id="exampleFormControlInput1"
-                                           name="address"
-                                           placeholder="Your Address " required
-                                           type="text">
-                                </div>
-                                <div class="form-group mx-5">
-                                    <label class=" family" for="exampleFormControlInput1">Phone
-                                        NO</label>
-                                    <input value="{{ phone }}" class="form-control inputt whitesm" id="exampleFormControlInput1"
-                                           maxlength="10"
-                                           name="phone"
-                                           placeholder="Optional" type="tel">
-                                </div>
-                                <div class="form-group mx-5">
-                                    <label class=" family" for="exampleFormControlInput1">GitHub
-                                        id</label>
-                                    <input value="{{ github }}"  class="form-control inputt whitesm" id="exampleFormControlInput1"
-                                           name="github"
-                                           placeholder="Optional"
-                                           type="url">
-                                </div>
-                                <div class="form-group mx-5">
-                                    <label class=" family" for="exampleFormControlInput1">LinkedIn
-                                        id</label>
-                                    <input class="form-control inputt whitesm" id="exampleFormControlInput1"
-                                           name="linkedin" value="{{ linked }}"
-                                           placeholder="Optional"
-                                           type="url">
-                                </div>
 
-                                <div class="align-self-center ">
 
-                                    <button class="butn butn-bg px-4 py-2" style="border-radius: 1rem;" type="submit">
-                                        <span>Save</span>
+
+
+                        <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade mow"
+                             id="exampleModalCenter{{ count }}"
+                             role="dialog" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content ">
+                                    <div class="modal-header whitesm ">
+                                        <h5 class="modal-title " id="exampleModalCenterTitle">Personal Details</h5>
+                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body whitesm ">
+                                        <div class="container shadow-sm  rounded whitesm  mx-auto">
+                                            <form class="d-flex flex-column flex-wrap " method="post">{% csrf_token %}
+                                                {{ form | crispy }}
+                                                <!--<div class="form-group mx-5">
+                                                    <label class=" family" for="exampleFormControlInput1">Name</label>
+                                                    <input value="{{ name }}" class="form-control inputt whitesm"
+                                                           id="exampleFormControlInput1" name="name"
+                                                           placeholder="Full Name" required
+                                                           type="text">
+                                                </div>
+                                                <div class="form-group mx-5">
+                                                    <label class=" family" for="exampleFormControlInput1">Email</label>
+                                                    <input value="{{ email }}" class="form-control inputt whitesm"
+                                                           id="exampleFormControlInput1"
+                                                           name="email"
+                                                           placeholder="email@example.com" required
+                                                           type="email">
+                                                </div>
+                                                <div class="form-group mx-5">
+                                                    <label class=" family" for="exampleFormControlInput1">Date Of
+                                                        Birth</label>
+                                                    <input value="{{ dob }}" class="form-control inputt whitesm"
+                                                           id="exampleFormControlInput1" name="dob"
+                                                           placeholder="" required
+                                                           type="date">
+                                                </div>
+
+
+                                                <div class="form-group mx-5">
+                                                    <label class=" family"
+                                                           for="exampleFormControlInput1">Address</label>
+                                                    <input value="{{ address }}" class="form-control inputt whitesm "
+                                                           id="exampleFormControlInput1"
+                                                           name="address"
+                                                           placeholder="Your Address " required
+                                                           type="text">
+                                                </div>
+                                                <div class="form-group mx-5">
+                                                    <label class=" family" for="exampleFormControlInput1">Phone
+                                                        NO</label>
+                                                    <input value="{{ phone }}" class="form-control inputt whitesm"
+                                                           id="exampleFormControlInput1"
+                                                           maxlength="10"
+                                                           name="phone"
+                                                           placeholder="Optional" type="tel">
+                                                </div>
+                                                <div class="form-group mx-5">
+                                                    <label class=" family" for="exampleFormControlInput1">GitHub
+                                                        id</label>
+                                                    <input value="{{ github }}" class="form-control inputt whitesm"
+                                                           id="exampleFormControlInput1"
+                                                           name="github"
+                                                           placeholder="Optional"
+                                                           type="url">
+                                                </div>
+                                                <div class="form-group mx-5">
+                                                    <label class=" family" for="exampleFormControlInput1">LinkedIn
+                                                        id</label>
+                                                    <input class="form-control inputt whitesm"
+                                                           id="exampleFormControlInput1"
+                                                           name="linkedin" value="{{ linked }}"
+                                                           placeholder="Optional"
+                                                           type="url">
+                                                </div>-->
+
+                                                <div class="align-self-center ">
+
+                                                    <button class="butn butn-bg px-4 py-2" style="border-radius: 1rem;"
+                                                            type="submit">
+                                                        <span>Save</span>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endwith %}
+
+
+
+                <div class="container shadow-sm p-3 mb-5  whitesm rounded  ">
+
+
+                    <!-- Button trigger modal -->
+
+                        <div class="row ">
+                            <button class=" butn butn-bg mx-auto   align-self-start" data-target="#exampleModalCenter"
+                                    data-toggle="modal" style="border-radius: 4rem;padding: 12px"
+                                    type="button">
+                                <span> + Add Personal Details</span>
+                            </button>
+                        </div>
+                        <div class="row blocdis">
+                            <button class="py-2 mx-auto btn transi   align-self-start" data-target="#exampleModalCenter"
+                                    data-toggle="modal"
+                                    style="border-radius: 4rem;background-color:  rgba(248, 102, 7,0.6);color: black"
+                                    type="button" disabled>
+                                + Add Personal Details
+                            </button>
+                        </div>
+                    <!-- Modal -->
+                    <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade mow"
+                         id="exampleModalCenter"
+                         role="dialog" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content ">
+                                <div class="modal-header whitesm">
+                                    <h5 class="modal-title family" id="exampleModalCenSterTitle">Personal Details</h5>
+                                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                            </form>
-                                </div>
+                                <div class="modal-body whitesm">
+                                    <div class="container shadow-sm rounded whitesm  mx-auto">
 
+                                        <form class="d-flex flex-column flex-wrap " method="post">{% csrf_token %}
+                                            {{ form | crispy }}
+                                            <!--<div class="form-group mx-5">
+                                                <label class=" family" for="exampleFormControlInput1">Name</label>
+                                                <input class="form-control inputt whitesm" id="exampleFormControlInput1"
+                                                       name="name"
+                                                       placeholder="Full Name" required
+                                                       type="text">
+                                            </div>
+                                            <div class="form-group mx-5">
+                                                <label class=" family" for="exampleFormControlInput1">Email</label>
+                                                <input class="form-control inputt whitesm" id="exampleFormControlInput1"
+                                                       name="email"
+                                                       placeholder="email@example.com" required
+                                                       type="email">
+                                            </div>
+                                            <div class="form-group mx-5">
+                                                <label class=" family" for="exampleFormControlInput1">Date Of
+                                                    Birth</label>
+                                                <input class="form-control inputt whitesm" id="exampleFormControlInput1"
+                                                       name="dob"
+                                                       placeholder="" required
+                                                       type="date">
+                                            </div>
+
+
+                                            <div class="form-group mx-5">
+                                                <label class=" family"
+                                                       for="exampleFormControlInput1">Address</label>
+                                                <input class="form-control inputt whitesm "
+                                                       id="exampleFormControlInput1"
+                                                       name="address"
+                                                       placeholder="Your Address " required
+                                                       type="text">
+                                            </div>
+                                            <div class="form-group mx-5">
+                                                <label class=" family" for="exampleFormControlInput1">Phone
+                                                    NO</label>
+                                                <input class="form-control inputt whitesm" id="exampleFormControlInput1"
+                                                       maxlength="10"
+                                                       name="phone"
+                                                       placeholder="Optional" type="tel">
+                                            </div>
+                                            <div class="form-group mx-5">
+                                                <label class=" family" for="exampleFormControlInput1">GitHub
+                                                    id</label>
+                                                <input class="form-control inputt whitesm" id="exampleFormControlInput1"
+                                                       name="github"
+                                                       placeholder="Optional"
+                                                       type="url">
+                                            </div>
+                                            <div class="form-group mx-5">
+                                                <label class=" family" for="exampleFormControlInput1">LinkedIn
+                                                    id</label>
+                                                <input class="form-control inputt whitesm" id="exampleFormControlInput1"
+                                                       name="linkedin"
+                                                       placeholder="Optional"
+                                                       type="url">
+                                            </div>-->
+
+                                            <div class="align-self-center ">
+
+                                                <button class="butn butn-bg px-4 py-2" style="border-radius: 1rem;"
+                                                        type="submit"><span>Save</span>
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+
+                                </div>
 
                             </div>
-
                         </div>
                     </div>
-                </div>
-
-        {% endwith %}
-
-{% endif %}
-
-    <div class="container shadow-sm p-3 mb-5  whitesm rounded  ">
-
-
-
-        <!-- Button trigger modal -->
-    {% if disable == False %}
-        <div class="row ">
-            <button class=" butn butn-bg mx-auto   align-self-start" data-target="#exampleModalCenter"
-                    data-toggle="modal" style="border-radius: 4rem;padding: 12px"
-                    type="button">
-               <span> + Add Personal Details</span>
-            </button>
-        </div>
-    {% endif %}
-    {% if disable == True %}
-        <div class="row blocdis">
-            <button  class="py-2 mx-auto btn transi   align-self-start" data-target="#exampleModalCenter"
-                    data-toggle="modal" style="border-radius: 4rem;background-color:  rgba(248, 102, 7,0.6);color: black"
-                    type="button" disabled>
-                + Add Personal Details
-            </button>
-        </div>
-    {% endif %}
-        <!-- Modal -->
-        <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade mow" id="exampleModalCenter"
-             role="dialog" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content ">
-                    <div class="modal-header whitesm">
-                        <h5 class="modal-title family" id="exampleModalCenSterTitle">Personal Details</h5>
-                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body whitesm">
-                        <div class="container shadow-sm rounded whitesm  mx-auto">
-
-                            <form class="d-flex flex-column flex-wrap " method="post">{% csrf_token %}
-                                <div class="form-group mx-5">
-                                    <label class=" family" for="exampleFormControlInput1">Name</label>
-                                    <input class="form-control inputt whitesm" id="exampleFormControlInput1" name="name"
-                                           placeholder="Full Name" required
-                                           type="text">
-                                </div>
-                                <div class="form-group mx-5">
-                                    <label class=" family" for="exampleFormControlInput1">Email</label>
-                                    <input class="form-control inputt whitesm" id="exampleFormControlInput1"
-                                           name="email"
-                                           placeholder="email@example.com" required
-                                           type="email">
-                                </div>
-                                <div class="form-group mx-5">
-                                    <label class=" family" for="exampleFormControlInput1">Date Of
-                                        Birth</label>
-                                    <input class="form-control inputt whitesm" id="exampleFormControlInput1" name="dob"
-                                           placeholder="" required
-                                           type="date">
-                                </div>
-
-
-                                <div class="form-group mx-5">
-                                    <label class=" family"
-                                           for="exampleFormControlInput1">Address</label>
-                                    <input class="form-control inputt whitesm " id="exampleFormControlInput1"
-                                           name="address"
-                                           placeholder="Your Address " required
-                                           type="text">
-                                </div>
-                                <div class="form-group mx-5">
-                                    <label class=" family" for="exampleFormControlInput1">Phone
-                                        NO</label>
-                                    <input class="form-control inputt whitesm" id="exampleFormControlInput1"
-                                           maxlength="10"
-                                           name="phone"
-                                           placeholder="Optional" type="tel">
-                                </div>
-                                <div class="form-group mx-5">
-                                    <label class=" family" for="exampleFormControlInput1">GitHub
-                                        id</label>
-                                    <input class="form-control inputt whitesm" id="exampleFormControlInput1"
-                                           name="github"
-                                           placeholder="Optional"
-                                           type="url">
-                                </div>
-                                <div class="form-group mx-5">
-                                    <label class=" family" for="exampleFormControlInput1">LinkedIn
-                                        id</label>
-                                    <input class="form-control inputt whitesm" id="exampleFormControlInput1"
-                                           name="linkedin"
-                                           placeholder="Optional"
-                                           type="url">
-                                </div>
-
-                                <div class="align-self-center ">
-
-                                    <button class="butn butn-bg px-4 py-2" style="border-radius: 1rem;" type="submit"><span>Save</span>
+                    <div class="row my-4">
+                        <div class="d-flex justify-content-center  mx-auto">
+                            {% if show == True %}
+                                <a class="  " href="education">
+                                    <button class="butn butn-bg px-4 py-2" style="border-radius: 1rem;" type="submit"
+                                    >
+                                        <span>Next</span>
                                     </button>
-                                </div>
-                            </form>
+                                </a>
+                            {% endif %}
+
+                                <!--<a class="  " href="">
+                                    <button class="butn butn-bg  px-4 py-2"
+                                            onclick="alert('Please add Personal Details')"
+                                            style="border-radius: 1rem;" type="button"
+                                    >
+                                        <span>Next</span>
+                                    </button>
+                                </a>-->
 
                         </div>
-
-
                     </div>
+
 
                 </div>
             </div>
-        </div>
-        <div class="row my-4">
-            <div class="d-flex justify-content-center  mx-auto">
-                {% if show == True %}
-                <a class="  " href="Education.html">
-                    <button class="butn butn-bg px-4 py-2" style="border-radius: 1rem;" type="submit"
-                    >
-                        <span>Next</span>
-                    </button>
-                </a>
-                {% endif %}
-                {% if show == False %}
-                <a class="  " href="">
-                    <button class="butn butn-bg  px-4 py-2" onclick="alert('Please add Personal Details')"
-                            style="border-radius: 1rem;" type="button"
-                    >
-                        <span>Next</span>
-                    </button>
-                </a>
-                {% endif %}
-            </div>
-        </div>
+        {% endblock %}
+    </section>
+</main>
+<script>
 
 
-    </div>
-</div>
+</script>
 
 
 <!-- Optional JavaScript -->
