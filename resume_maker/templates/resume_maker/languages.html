@@ -1,0 +1,81 @@
+{% extends "resume_maker/getinput.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="p-2 m-4 bg-lggr">
+    <h3 class="m-2 text-center font-weight-bold">Languages Known</h3>
+</div>
+<hr class="mx-auto horiline"/>
+<div class="container shadow-sm p-3 mb-5 bg-white rounded">
+    <form class="">
+
+        {{ lang | crispy }}
+
+
+        <!--<div class="form-group mx-5">
+            <label for="exampleFormControlTextarea1" class="font-weight-bold">Extra-Curricular Activaties And
+                Achievents</label>
+            <textarea class="form-control inputt" id="exampleFormControlTextarea1" rows="5"></textarea>
+        </div>-->
+
+
+    </form>
+    <button type="button" class="btn btn-primary mx-5 bg-light text-dark modbtn align-self-start" data-toggle="modal"
+            data-target="#exampleModalCenter">
+        + Add Languages
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade mow" id="exampleModalCenter" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Education</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container shadow-sm  bg-white rounded ">
+                        <form class="d-flex flex-wrap flex-column ">
+                            <div class="form-group mx-5">
+            <label for="exampleFormControlTextarea1" class="font-weight-bold">Extra-Curricular Activaties And
+                Achievents</label>
+            <textarea class="form-control inputt"  id="exampleFormControlTextarea1" rows="5"></textarea>
+        </div>
+                    <div class="align-self-center ">
+
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Save</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+  <div class="d-flex justify-content-around inputt" >
+    <a href="extra.html" class=" ">
+        <button type="button" class="btn btn-primary  bg-light text-dark modbtn"
+           >
+        Back
+    </button>
+    </a>
+    <a href="site.html" class="  ">
+        <button type="submit" class="btn btn-primary  bg-light text-dark modbtn"
+        >
+        Show my Resume
+    </button>
+    </a>
+</div>
+</div>
+
+{% endblock %}
+
+
+</html>

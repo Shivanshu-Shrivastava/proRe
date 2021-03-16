@@ -43,11 +43,11 @@ def render_page(request):
         "hobb": Hobbies,
     }
 
-    return render(request,"site.html",context)
+    return render(request,"resume_maker\site.html",context)
 
 
 def personal_det(request):
-    return render(request,"getinput.html", { "person":PersonForm})
+    return render(request,"resume_maker\getinput.html", { "person":PersonForm})
 
 first = True
 def get_input(request):
@@ -82,10 +82,10 @@ def get_input(request):
 
             #form = PersonForm()
             first = False
-            return render(request,"getinput.html",{"form":form,"person":form.cleaned_data,"show":first})
+            return render(request,"resume_maker/getinput.html",{"form":form,"person":form.cleaned_data,"show":first})
     else:
         form = PersonForm()
-    return render(request, "getinput.html",{"form":form,"show":first,"person":person})
+    return render(request,"resume_maker/getinput.html",{"form":form,"show":first,"person":person})
 
 def edu(request,id = None):
     person = Person.objects.last()
@@ -118,10 +118,10 @@ def edu(request,id = None):
                     data.save()
         form = EducationForm()
         show = True
-        return render(request,"Education.html",{"edu":form,"data":edu,"show":show})
+        return render(request,"resume_maker\Education.html",{"edu":form,"data":edu,"show":show})
     else:
         form = EducationForm()
-    return render(request,"Education.html",{"edu":form,"data":edu,"show":show})
+    return render(request,"resume_maker\Education.html",{"edu":form,"data":edu,"show":show})
 
 def wor(request):
     person = Person.objects.last()
@@ -152,10 +152,10 @@ def wor(request):
             form = ExperienceForm()
             print(exp)
 
-            return render(request,"work.html",{"exp":form,"data":exp,"show":show})
+            return render(request,"resume_maker\work.html",{"exp":form,"data":exp,"show":show})
     else:
         form = ExperienceForm()
-    return render(request,"work.html",{"exp" : form,"show":show,"data":exp})
+    return render(request,"resume_maker\work.html",{"exp" : form,"show":show,"data":exp})
 
 def skill(request):
     show = True
@@ -177,10 +177,10 @@ def skill(request):
 
             form = SkillsForm()
 
-            return render(request,"skillset.html",{"skill":form,"data":skills,"show":show})
+            return render(request,"resume_maker\skillset.html",{"skill":form,"data":skills,"show":show})
     else:
         form = SkillsForm()
-    return render(request,"skillset.html", { "skill": form,"show":show,"data":skills})
+    return render(request,"resume_maker\skillset.html", { "skill": form,"show":show,"data":skills})
 
 def pro(request):
     show =True
@@ -208,20 +208,20 @@ def pro(request):
 
             show = True
 
-            return render(request,"project.html",{"prjct":form,"data":prjcts,"show":show})
+            return render(request,"resume_maker\project.html",{"prjct":form,"data":prjcts,"show":show})
     else:
         form = ProjectsForm()
-    return render(request,"project.html", {"prjct": form,"show":show,"data":prjcts})
+    return render(request,"resume_maker\project.html", {"prjct": form,"show":show,"data":prjcts})
 
 def lang(request):
     if request.method == "POST":
         form = LanguageForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request,"languages.html",{"lang":form,"data":form.cleaned_data})
+            return render(request,"resume_maker\languages.html",{"lang":form,"data":form.cleaned_data})
     else:
         form = LanguageForm()
-    return render(request,"languages.html", { "lang": form })
+    return render(request,"resume_maker\languages.html", { "lang": form })
 
 def ext(request):
     show = True
@@ -243,10 +243,10 @@ def ext(request):
 
             form = AchievementsForm()
 
-            return render(request,"extra.html",{"ach":form,"data":ach, "show":show})
+            return render(request,"resume_maker\extra.html",{"ach":form,"data":ach, "show":show})
     else:
         form = AchievementsForm()
-    return render(request,"extra.html", { "ach" : form, "show":show,"data":ach})
+    return render(request,"resume_maker\extra.html", { "ach" : form, "show":show,"data":ach})
 
 def get_pdf(request):
     pass
