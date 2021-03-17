@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'resume_maker',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
