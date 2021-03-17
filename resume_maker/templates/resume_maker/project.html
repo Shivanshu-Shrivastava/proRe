@@ -1,4 +1,4 @@
-{% extends "resume_maker\getinput.html" %}
+{% extends "getinput.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
     <main class="row">
@@ -54,20 +54,19 @@
                                     <h6 class="text-capitalize">{{ i.project_link }}</h6>
                                 </div>
                                 <div class="d-flex flex-column flex-wrap my-4" style="max-width: 200px">
-                                    <!--<svg data-toggle="modal" data-target="#exampleModalCenter{{ forloop.counter }}"
+                                    <svg data-toggle="modal" data-target="#exampleModalCenter{{ forloop.counter }}"
                                          xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                          class="bi bi-pencil-square " viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                         <path fill-rule="evenodd"
                                               d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
-                                    <svg data-toggle="modal"
-                                         onclick="document.getElementById('del{{ forloop.counter }}').style.display='none'"
+                                    <a href = "project/{{ i.id }}"><svg data-toggle="modal"
                                          xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                          class="bi bi-trash mt-3" viewBox="0 0 16 16">
                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                         <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                    </svg>-->
+                                    </svg></a>
                                 </div>
                             </div>
                         </div>
@@ -86,8 +85,11 @@
                                     </div>
                                     <div class="modal-body whitesm ">
                                         <div class="container shadow-sm  rounded whitesm  mx-auto">
-                                            <form class="d-flex flex-wrap flex-column" method="post">{% csrf_token %}
-                                                <div class="form-group mx-5">
+                                            <form class="d-flex flex-wrap flex-column" method="post" action = "project/edit/{{ i.id }}">{% csrf_token %}
+                                                {{ prjct | crispy }}
+
+                                                {{ prject.instance }}
+                                                <!--<div class="form-group mx-5">
                                                     <label class="family" for="exampleFormControlTextarea1">Projects
                                                     </label>
                                                     <textarea name="project" class=" whitesm form-control inpuw"
@@ -113,7 +115,7 @@
                                                            id="exampleFormControlInput1"
                                                            name="projlink"
                                                            placeholder="Optional"
-                                                           type="url"></div>
+                                                           type="url"></div>-->
                                                 <div class="align-self-center ">
                                                     <button class="butn butn-bg px-3 py-2" style="border-radius: 1rem;"
                                                             type="submit">
@@ -140,9 +142,7 @@
                 </button>
             </div>
             <!-- Modal -->
-            <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade mow"
-                 id="exampleModalCenter"
-                 role="dialog" tabindex="-1">
+            <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade mow" id="exampleModalCenter" role="dialog" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content modcont whitesm">
                         <div class="modal-header whitesm">

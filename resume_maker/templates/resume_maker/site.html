@@ -19,8 +19,8 @@
 
 <body style="min-width: 420px">
 
-<div class = "card whitesm align-center ">
-    <div id="invoice" class="container ">
+<div class = "card whitesm align-center my-5 mx-5">
+    <div id="invoice" class="container px-3 py-3">
     <header>
         <blockquote class=" blockquote mx-4
     "><span class="namehead variabletext">{{ person.full_name }}</span>
@@ -87,9 +87,9 @@
 {#                  {% endfor %}#}
 {#                </tbody>#}
 {#            </table>#}
-              <div class="d-flex flex-wrap justify-content-around">
+              <div class="d-flex flex-wrap justify-content-between">
 
-              <div class="d-flex flex-column flex-wrap">
+              <div class="d-flex flex-column flex-wrap mx-3">
                     <div class="fontforsub"><b>Degree</b></div>
                     {% for i in education %}
                     <span class="fontforsubsub">{{ i.qualification }}</span>
@@ -139,7 +139,7 @@
                 <div class="d-flex flex-wrap justify-content-between">
                     <p class="ml-3 family fontforsub first mt-2"><b>{{ i.type }}:</b><span class="family mx-3 fontforsubsub first">{{ i.role }}</span> at <span class="family mx-3 fontforsubsub first">{{ i.company }}</span></p>
 
-                    <p class="ml-3 family fontforsub first float-right"><b>{{ i.join_dt }}</b> - <b>{% if i.current == True %}Present{% else %}{{ i.left_dt }}{% endif %}</b></p>
+                    <p class="ml-3 family fontforsubsub first float-right"><b>{{ i.join_dt }}</b> - <b>{% if i.current == True %}Present{% else %}{{ i.left_dt }}{% endif %}</b></p>
 
                      <!--<p class="family fontforsub first "><b>End date:</b><span class="family mx-3 fontforsubsub first">END DATE</span></p>-->
                 </div>
@@ -346,7 +346,7 @@
             console.log(window);
             var opt = {
                 margin: 0,
-                filename: 'Protrainy',
+                filename: '{{ person.full_name }}-resume',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
