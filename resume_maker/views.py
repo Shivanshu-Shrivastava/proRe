@@ -42,6 +42,7 @@ def render_page(request):
         "ach": ach,
         "hobb": Hobbies,
     }
+    print(ach,'acheivents')
 
     return render(request,"site.html",context)
 
@@ -83,9 +84,11 @@ def get_input(request):
             #form = PersonForm()
             if first == True:
                 first = False
+            print('$$$$$$$',first)
             return render(request,"getinput.html",{"form":form,"person":form.cleaned_data,"show":first})
     else:
         form = PersonForm()
+        print(first)
     return render(request, "getinput.html",{"form":form,"show":first,"person":person})
 
 def edu(request):
@@ -126,9 +129,11 @@ def edu(request):
         form = EducationForm()
         if first == True:
             first = False
+        print('$$$$$$$', first)
         return render(request,"Education.html",{"edu":form,"data":edu,"show":first})
     else:
         form = EducationForm()
+        print('%%%%%',first)
     return render(request,"Education.html",{"edu":form,"data":edu,"show":first,"edit":new_form})
 
 def eduedit(request,id):
@@ -166,11 +171,15 @@ def edudel(request,id):
 
 def wor(request,id=None):
     person = Person.objects.last()
-    print(person)
+
     show = True
     exp = Experience.objects.filter(person = person)
+    # w=request.POST.get('current')
+    # print("##########",w)
 
     if request.method == "POST":
+        next=True
+
         form = ExperienceForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
@@ -191,11 +200,12 @@ def wor(request,id=None):
 
             show = True
             form = ExperienceForm()
-            print(exp)
-            return render(request,"work.html",{"exp":form,"data":exp,"show":show})
+
+            return render(request,"work.html",{'next':next,"exp":form,"data":exp,"show":show})
     else:
         form = ExperienceForm()
-    return render(request,"work.html",{"exp" : form,"show":show,"data":exp})
+        next=False
+    return render(request,"work.html",{'next':next,"exp" : form,"show":show,"data":exp})
 
 
 def editwork(request,id):
@@ -227,9 +237,11 @@ def delwork(request,id):
 
 def skill(request,id = None):
     show = True
+
     person = Person.objects.last()
     skills = SkillSet.objects.filter(person = person)
     if request.method == "POST":
+        next = True
         form = SkillsForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
@@ -245,10 +257,11 @@ def skill(request,id = None):
 
             form = SkillsForm()
 
-            return render(request,"skillset.html",{"skill":form,"data":skills,"show":show})
+            return render(request,"skillset.html",{'next':next,"skill":form,"data":skills,"show":show})
     else:
         form = SkillsForm()
-    return render(request,"skillset.html", { "skill": form,"show":show,"data":skills})
+        next = False
+    return render(request,"skillset.html", { 'next':next,"skill": form,"show":show,"data":skills})
 
 def editskill(request,id):
     instance = SkillSet.objects.get(id=id)
@@ -282,6 +295,7 @@ def pro(request):
     person = Person.objects.last()
     prjcts = Projects.objects.filter(person = person)
     if request.method == "POST":
+        next=True
         form = ProjectsForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
@@ -300,10 +314,11 @@ def pro(request):
                 data.save()
             form = ProjectsForm()
             show = True
-            return render(request,"project.html",{"prjct":form,"data":prjcts,"show":show})
+            return render(request,"project.html",{'next':next,"prjct":form,"data":prjcts,"show":show})
     else:
         form = ProjectsForm()
-    return render(request,"project.html", {"prjct": form,"show":show,"data":prjcts})
+        next=False
+    return render(request,"project.html", {'next':next,"prjct": form,"show":show,"data":prjcts})
 
 def editpro(request,id):
     instance = Projects.objects.get(id=id)
@@ -348,6 +363,7 @@ def ext(request,id = None):
     person = Person.objects.last()
     ach = Achievements.objects.filter(person = person)
     if request.method == "POST":
+        next=True
         form = AchievementsForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
@@ -363,10 +379,11 @@ def ext(request,id = None):
 
             form = AchievementsForm()
 
-            return render(request,"extra.html",{"ach":form,"data":ach, "show":show})
+            return render(request,"extra.html",{'next':next,"ach":form,"data":ach, "show":show})
     else:
         form = AchievementsForm()
-    return render(request,"extra.html", { "ach" : form, "show":show,"data":ach})
+        next=False
+    return render(request,"extra.html", { 'next':next,"ach" : form, "show":show,"data":ach})
 
 def editext(request,id):
     instance = Achievements.objects.get(id=id)

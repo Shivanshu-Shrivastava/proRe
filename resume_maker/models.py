@@ -1,5 +1,5 @@
 from django.db import models
-#from phonenumber_field.modelfields import PhoneNumberField
+
 
 # Create your models here.
 class Person(models.Model):
@@ -9,7 +9,7 @@ class Person(models.Model):
     last_name = models.CharField(max_length=25)
     email = models.EmailField()
     mobile_no = models.IntegerField()
-    #mobile_no = PhoneNumberField()
+
     age = models.IntegerField()
     dob = models.DateField()
     address = models.TextField()

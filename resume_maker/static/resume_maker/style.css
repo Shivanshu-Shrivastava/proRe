@@ -157,7 +157,7 @@ nav{
     background-color: whitesmoke;
 }
 .linergra{
-    background: linear-gradient(to right , rgb(121, 43, 217), rgb(13, 172, 108));
+    background-color: rgba(121, 43, 217,0.8);
     border-radius: 1.6rem;
 }
 .transi{
@@ -219,14 +219,14 @@ nav{
 }
 
 .butn-bg {
-  background: linear-gradient(to right , rgb(121, 43, 217), rgb(13, 172, 108));
-  border-color: rgb(160, 87, 20);
+  background-color:  rgba(121, 43, 217,0.8);
+  border-color: rgba(121, 43, 217,0.8);
   color: #fff;
 
 }
 .butn-bg:hover span {
-  color: rgb(160, 87, 20);
-    border-color: rgb(160, 87, 20);
+  color: rgba(121, 43, 217,0.8);
+    border-color: rgba(121, 43, 217,0.8);
 }
 
 .butn-light,
@@ -310,4 +310,13 @@ footer a{
 }
 .headcolor{
    color: bisque;
+}
+.rounde{
+    border-radius: 11.2rem;
+}
+.fontsize{
+    font-size: 20px;
+}
+svg{
+    color: #d2691e;
 }
