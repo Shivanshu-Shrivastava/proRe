@@ -88,8 +88,8 @@
                                             <form class="d-flex flex-wrap flex-column" method="post" action = "project/edit/{{ i.id }}">{% csrf_token %}
                                                 {{ prjct | crispy }}
 
-                                                {{ prject.instance }}
-                                                <!--<div class="form-group mx-5">
+{#                                               {{ prject.instance }}#}
+                                                <!-- <div class="form-group mx-5">
                                                     <label class="family" for="exampleFormControlTextarea1">Projects
                                                     </label>
                                                     <textarea name="project" class=" whitesm form-control inpuw"

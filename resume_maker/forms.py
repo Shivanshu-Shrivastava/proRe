@@ -51,7 +51,7 @@ class ExperienceForm(ModelForm):
         # if Experience.current == True:
         #     w='Present'
         widgets = {
-            'current':forms.TextInput(attrs={'id':'id_curr'}),
+            # 'current':forms.TextInput(attrs={'id':'id_curr'}),
             'join_dt': DateInput(),
             'left_dt': DateInput(),
 
@@ -63,14 +63,14 @@ class ExperienceForm(ModelForm):
             'current': 'Currently Working Here',
         }
 
-        class ExampleForm(forms.Form):
-            def __init__(self, *args, **kwargs):
-                super().__init__(*args, **kwargs)
-                self.helper = FormHelper(self)
-                self.helper.layout = Layout(
-                    Field('current', css_id='id_curr', css_class="form-contro-l"),
-                    Field('left_dt',css_id="id_left",css_class='sayam')
-                )
+        # class ExampleForm(forms.Form):
+        #     def __init__(self, *args, **kwargs):
+        #         super().__init__(*args, **kwargs)
+        #         self.helper = FormHelper(self)
+        #         self.helper.layout = Layout(
+        #             Field('current', css_id='id_curr', css_class="form-contro-l"),
+        #             Field('left_dt',css_id="id_left",css_class='sayam')
+        #         )
 
 class SkillsForm(ModelForm):
     class Meta:
