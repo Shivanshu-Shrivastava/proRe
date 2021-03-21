@@ -32,7 +32,7 @@
             <div class="container">
                 <div class="shadow p-2  rounde  my-4 bg-lggr d-flex flex-wrap  justify-content-center linergra"
                     >
-                    <h3 class="m-2 text-center font-weight-bold">Skills</h3>
+                    <h3 class="m-2 text-center font-weight-bold">Skills<br><span class="optional" >(Optional)</span></h3>
                 </div>
                 <hr class="mx-auto "/>
                 {% with count=1 %}
@@ -201,22 +201,15 @@
                                     <span> Back</span>
                                 </button>
                             </a>
-                            {% if next == True %}
+
                             <a class="  " href="project">
                                 <button class="butn butn-bg px-3 py-2 modbtn" style="border-radius: 1rem;" type="submit"
                                 >
                                     <span>Next</span>
                                 </button>
                             </a>
-                            {% endif %}
-                        {% if next == False %}
-                            <a class="  " href="project">
-                                <button class="butn butn-bg px-3 py-2 modbtn" style="border-radius: 1rem;" type="submit"
-                                >
-                                    <span> Skip</span>
-                                </button>
-                            </a>
-                            {% endif %}
+
+
                         </div>
                     </div>
 

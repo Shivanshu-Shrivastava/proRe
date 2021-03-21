@@ -17,7 +17,11 @@ class PersonForm(ModelForm):
         fields = "__all__"
         widgets = {
             'dob': DateInput(),
+
+
         }
+        labels = {
+            'dob': 'Date of Birth',}
 
 
 class EducationForm(ModelForm):
@@ -47,8 +51,10 @@ class ExperienceForm(ModelForm):
         # if Experience.current == True:
         #     w='Present'
         widgets = {
+            'current':forms.TextInput(attrs={'id':'id_curr'}),
             'join_dt': DateInput(),
             'left_dt': DateInput(),
+
             'details': forms.Textarea(attrs={'placeholder': 'Max 250 words\nKeep it to 3-4 points'})
         }
         labels = {

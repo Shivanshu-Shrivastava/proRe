@@ -317,6 +317,11 @@ footer a{
 .fontsize{
     font-size: 20px;
 }
+.optional{
+    font-size: 1rem;
+    color: darkgray;
+    font-weight: 500;
+}
 svg{
     color: #d2691e;
 }

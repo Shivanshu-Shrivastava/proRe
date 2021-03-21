@@ -23,7 +23,12 @@
     <div id="invoice" class="container ">
         <header>
             <blockquote class=" blockquote mx-4
-    "><span class="namehead variabletext">{{ person.full_name }}</span>
+    "><span class="namehead variabletext">{% if person.middle_name != None %}
+                {{ person.full_name }}
+            {% endif %}
+            {% if person.middle_name == None %}
+            {{ person.full_name_without_middle }}
+            {% endif %}</span>
 
                 <footer class="footerr">
                     {{ person.dob }}
@@ -367,7 +372,12 @@
                 console.log(window);
                 var opt = {
                     margin: 0,
-                    filename: '{{ person.full_name }}-resume',
+                    filename: '{% if person.middle_name != None %}
+                {{ person.full_name }}
+            {% endif %}
+            {% if person.middle_name == None %}
+            {{ person.full_name_without_middle }}
+            {% endif %}-resume',
                     image: {type: 'jpeg', quality: 0.98},
                     html2canvas: {scale: 2},
                     jsPDF: {unit: 'in', format: 'letter', orientation: 'portrait'}

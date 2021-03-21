@@ -8,7 +8,7 @@ class Person(models.Model):
     middle_name = models.CharField(max_length=25,null =True, blank = True)
     last_name = models.CharField(max_length=25)
     email = models.EmailField()
-    mobile_no = models.IntegerField()
+    mobile_no = models.CharField(max_length=10)
 
     age = models.IntegerField()
     dob = models.DateField()
@@ -19,6 +19,8 @@ class Person(models.Model):
 
     def full_name(self):
         return " ".join([self.first_name, self.middle_name, self.last_name])
+    def full_name_without_middle(self):
+        return " ".join([self.first_name,  self.last_name])
 
     def __str__(self):
         return self.first_name
@@ -29,6 +31,7 @@ class Education(models.Model):
         ('Masters','Masters'),
         ('Bachelors','Bachelors'),
         ('High School','High School')
+
     )
     Status = (
         ('Pursuing','Pursuing'),
