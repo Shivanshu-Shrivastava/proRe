@@ -43,8 +43,8 @@
                         <div id="del{{ forloop.counter }}">
                             {#            {{ count|add:'1' }}#}
                             <div class="alert alert-warning" role="alert">
-                                <div class="d-flex justify-content-around flex-wrap ">
-                                    <div class="d-flex flex-column justify-content-between flex-wrap ">
+                                <div class="d-flex justify-content-around row ">
+                                    <div class="d-flex flex-column col col-md-3 ">
                                         <h6 class="text-capitalize">Type</h6>
                                         <h6 class="text-capitalize">Company</h6>
                                         <h6 class="text-capitalize">Role</h6>
@@ -52,7 +52,7 @@
                                         <h6 class="text-capitalize">Description</h6>
 
                                     </div>
-                                    <div class="d-flex flex-column justify-content-between flex-wrap ">
+                                    <div class="d-flex flex-column col col-md-5 ">
                                         <h6 class="text-capitalize">{{ i.type }}</h6>
                                         <h6 class="text-capitalize">{{ i.company }}</h6>
                                         <h6 class="text-capitalize">{{ i.role }}</h6>
