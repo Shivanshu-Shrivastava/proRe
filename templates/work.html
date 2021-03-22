@@ -33,7 +33,8 @@
             <div class="container">
                 <div class="shadow p-2  rounde  my-4 bg-lggr d-flex flex-wrap  justify-content-center linergra"
                 >
-                    <h3 class="m-2 text-center font-weight-bold">Work Experience <br><span class="optional">(Optional)</span></h3>
+                    <h3 class="m-2 text-center font-weight-bold">Work Experience <br><span
+                            class="optional">(Optional)</span></h3>
                 </div>
                 <hr class="mx-auto "/>
 
@@ -267,13 +268,13 @@
                                 </button>
                             </a>
 
-                                <a class="  " href="skills">
-                                    <button class="butn butn-bg px-3 py-2  modbtn" type="button"
-                                            style="border-radius: 1rem;"
-                                            id="nextcha">
-                                        <span>Next</span>
-                                    </button>
-                                </a>
+                            <a class="  " href="skills">
+                                <button class="butn butn-bg px-3 py-2  modbtn" type="button"
+                                        style="border-radius: 1rem;"
+                                        id="nextcha">
+                                    <span>Next</span>
+                                </button>
+                            </a>
 
                         </div>
                     </div>
@@ -284,16 +285,36 @@
         </section>
     </main>
     <script>
+        $("#id_curr").change(function() {
+    if(this.checked) {
+
+        document.getElementById("id_curr").addEventListener("click", function_t);
+
+        function function_t() {
 
 
 
+            {#var target = document.getElementById("id_curr");#}
+            var x = document.getElementById("id_left");
+
+                $('#id_left').attr('type', 'text');
+                document.getElementById("id_left").value = "Present";
+                 $("#id_left").attr("disabled", true);
 
 
+            }}
+        else {
+             $('#id_left').attr('type', 'date');
 
-        function savecha() {
-            var d = document.getElementById('nextcha');
-            d.innerHTML = 'Next';
+                 $("#id_left").attr("disabled", false);
         }
+
+
+        }
+     );
+
+
+
     </script>
 
 {% endblock %}

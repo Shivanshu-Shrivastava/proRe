@@ -51,9 +51,20 @@ class ExperienceForm(ModelForm):
         # if Experience.current == True:
         #     w='Present'
         widgets = {
-            # 'current':forms.TextInput(attrs={'id':'id_curr'}),
+            'current':forms.CheckboxInput(attrs={'name':'current',
+                                             'type':'checkbox',
+                                             'class':"checkboxinput form-check-input",
+                                             'id':'id_curr',
+
+                                                            }),
+
             'join_dt': DateInput(),
-            'left_dt': DateInput(),
+            'left_dt': forms.DateInput(attrs={
+                'name': 'left_dt',
+                'type': 'date',
+                'class': "dateinput form-control",
+                'id': 'id_left',
+            }),
 
             'details': forms.Textarea(attrs={'placeholder': 'Max 250 words\nKeep it to 3-4 points'})
         }
@@ -68,8 +79,8 @@ class ExperienceForm(ModelForm):
         #         super().__init__(*args, **kwargs)
         #         self.helper = FormHelper(self)
         #         self.helper.layout = Layout(
-        #             Field('current', css_id='id_curr', css_class="form-contro-l"),
-        #             Field('left_dt',css_id="id_left",css_class='sayam')
+        #             Field('current',id ='id_curr', css_class="form-contro-l"),
+        #             Field('left_dt',id="id_left",css_class='sayam')
         #         )
 
 class SkillsForm(ModelForm):
@@ -83,12 +94,24 @@ class ProjectsForm(ModelForm):
         exclude = ('person',)
         widgets = {
             'start_dt': DateInput(),
-            'end_dt': DateInput(),
+            'end_dt': forms.DateInput(attrs={
+                'name': 'left_dt',
+                'type': 'date',
+                'class': "dateinput form-control",
+                'id': 'id_left',
+            }),
+            'running': forms.CheckboxInput(attrs={'name': 'runnin',
+                                                  'type': 'checkbox',
+                                                  'class': "checkboxinput form-check-input",
+                                                  'id': 'id_curr',
+
+                                                  }),
+
         }
         labels = {
             'start_dt': 'Start Date',
             'end_dt': 'End Date',
-            'running': 'Recently Working on this project'
+            'running': 'Currently Working on this project'
         }
 
 class LanguageForm(ModelForm):

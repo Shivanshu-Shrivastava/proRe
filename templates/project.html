@@ -50,7 +50,12 @@
                                 </div>
                                 <div class="d-flex flex-column justify-content-between flex-wrap ">
                                     <h6 class="text-capitalize">{{ i.project }}</h6>
+                                    {% if i.end_dt != None  %}
                                     <h6 class="text-capitalize">{{ i.start_dt }}-{{ i.end_dt }}</h6>
+                                    {% endif %}
+                                {% if i.end_dt == None %}
+                                <h6 class="text-capitalize">{{ i.start_dt }}-Present</h6>
+                                    {% endif %}
                                     <h6 class="text-capitalize">{{ i.project_link }}</h6>
                                 </div>
                                 <div class="d-flex flex-column flex-wrap my-4" style="max-width: 200px">
@@ -203,4 +208,33 @@
             </div>
         </div>
     </div></section></main>
+    <script>
+     $("#id_curr").change(function() {
+    if(this.checked) {
+
+        document.getElementById("id_curr").addEventListener("click", function_t);
+
+        function function_t() {
+
+
+
+            {#var target = document.getElementById("id_curr");#}
+            var x = document.getElementById("id_left");
+
+                $('#id_left').attr('type', 'text');
+                document.getElementById("id_left").value = "Present";
+                 $("#id_left").attr("disabled", true);
+
+
+            }}
+        else {
+             $('#id_left').attr('type', 'date');
+
+                 $("#id_left").attr("disabled", false);
+        }
+
+
+        }
+     );
+    </script>
 {% endblock %}
