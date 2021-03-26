@@ -111,7 +111,7 @@
                                         </div>
                                         <div class="modal-body whitesm ">
                                             <div class="container shadow-sm  rounded whitesm  mx-auto">
-                                                <form class="d-flex flex-column flex-wrap " method="post"
+                                                <form class="d-flex flex-column flex-wrap " id="myForm" method="post"
                                                       action="/work/edit/{{ i.id }}">{% csrf_token %}
                                                     {{ exp | crispy }}
 
@@ -165,7 +165,10 @@
                                 data-target="#exampleModalCenter"
                                 style="border-radius: 4rem;" data-toggle="modal"
                                 type="button">
+                            {#                            {% with request.method='get' %}#}
+
                             <span>  + Add Work Experience</span>
+
                         </button>
                     </div>
 
@@ -184,6 +187,7 @@
                                 <div class="modal-body whitesm">
                                     <div class="container shadow-sm  whitesm rounded ">
                                         <form class="d-flex flex-column flex-wrap " method="post">{% csrf_token %}
+
                                             {{ exp | crispy }}
                                             <!--<div class="form-group mx-5">
                                         <label class="" for="exampleFormControlSelect1">Work Type</label>
@@ -285,35 +289,79 @@
         </section>
     </main>
     <script>
-        $("#id_curr").change(function() {
-    if(this.checked) {
+        {#$('input[name="current"]').click(function () {#}
+        {#    if(this.checked) {#}
+        {#        $('#id_left').attr('type', 'text');#}
+        {#        document.getElementById("id_left").value = "Present";#}
+        {#        $("#id_left").attr("disabled", true);#}
+        {#    }#}
+        {#    else{#}
+        {#            $('#id_left_dt').attr('type', 'date');#}
+        {##}
+        {#             $("#id_left_dt").attr("disabled", false);#}
+        {#    }});#}
+        {#document.getElementById("id_current").addEventListener("click", function_t);#}
+        {#function function_t(){#}
+        {#    alert('checked')}#}
+        {##}
+        {#    $("#id_current").change(function() {#}
+        {#if(this.checked) {#}
+        {##}
+        {#    document.getElementById("id_current").addEventListener("click", function_t);#}
+        {##}
+        {#    function function_t() {#}
+        {##}
+        {##}
+        {##}
+        {#var target = document.getElementById("id_curr");#}
+        {#        var x = document.getElementById("id_left_dt");#}
+        {##}
+        {#            $('#id_left_dt').attr('type', 'text');#}
+        {#            document.getElementById("id_left_dt").value = "Present";#}
+        {#             $("#id_left_dt").attr("disabled", true);#}
+        {##}
+        {##}
+        {#        }}#}
+        {#    else {#}
+        {#         $('#id_left_dt').attr('type', 'date');#}
+        {##}
+        {#             $("#id_left_dt").attr("disabled", false);#}
+        {#    }#}
+        {##}
+        {##}
+        {#    }#}
+        {# );#}
 
-        document.getElementById("id_curr").addEventListener("click", function_t);
+        function chapre(obj) {
+            if ($(obj).is(":checked")) {
 
-        function function_t() {
+                var x = document.getElementsByName('left_dt');
+                var y = document.getElementsByClassName('checkpro');
+                var i;
+
+                $(x).attr('type', 'text');
+                for (i = 0; i < y.length; i++) {
+                    y[i].value = "Present";
+                }
+                $(x).attr("disabled", true);
 
 
+            } else {
+                 //when not checked
+                {#$(x).attr('type', 'date');#}
+                var k = document.getElementsByClassName('checkpro');
+                var l;
+                   for (l = 0; l < k.length; l++) {
+                    $(k[l]).attr('type', 'date');
+                    $(k[l]).attr("disabled", false);
+                }
+                {#$(x).attr("disabled", false);#}
 
-            {#var target = document.getElementById("id_curr");#}
-            var x = document.getElementById("id_left");
-
-                $('#id_left').attr('type', 'text');
-                document.getElementById("id_left").value = "Present";
-                 $("#id_left").attr("disabled", true);
-
-
-            }}
-        else {
-             $('#id_left').attr('type', 'date');
-
-                 $("#id_left").attr("disabled", false);
+            }
         }
 
 
-        }
-     );
-
-
+        {#</script>#}
 
     </script>
 

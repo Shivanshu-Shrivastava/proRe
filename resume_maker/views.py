@@ -171,7 +171,7 @@ def edudel(request,id):
 
 def wor(request,id=None):
     person = Person.objects.last()
-
+    print(request.method,'11111111111')
     show = True
     exp = Experience.objects.filter(person = person)
     # w=request.POST.get('current')

@@ -148,10 +148,12 @@
                         <p class="ml-3 family fontforsub first mt-2"><b>{{ i.type }}:</b><span
                                 class="family mx-2 fontforsubsub first">{{ i.role }}</span> <b>Company</b> <span
                                 class="family mx-2 fontforsubsub first">{{ i.company }}</span></p>
-
-                        <p class="ml-3 family fontforsubsub first float-right"><b>{{ i.join_dt }}</b> - <b>
-                            {% if i.current == True %}Present{% else %}{{ i.left_dt }}{% endif %}</b></p>
-
+                        {% if i.end_dt != None %}
+                        <p class="ml-3 family fontforsubsub first float-right"><b>{{ i.join_dt }} - {{ i.end_dt }}</b></p>
+                            {% endif %}
+                     {% if i.end_dt == None %}
+                        <p class="ml-3 family fontforsubsub first float-right"><b>{{ i.join_dt }} - Present</b></p>
+                            {% endif %}
                         <!--<p class="family fontforsub first "><b>End date:</b><span class="family mx-3 fontforsubsub first">END DATE</span></p>-->
                     </div>
                     {% if i.details != None and i.details != '' %}
@@ -374,8 +376,8 @@
                     margin: 0,
                     filename: 'Protrainy',
                     image: {type: 'jpeg', quality: 0.98},
-                    html2canvas: {scale: 2},
-                    jsPDF: {unit: 'in', format: 'letter', orientation: 'portrait'}
+                    {#html2canvas: {scale: 2},#}
+                    {#jsPDF: {unit: 'in', format: 'letter', orientation: 'portrait'}#}
                 };
                 html2pdf().from(invoice).set(opt).save();
             })

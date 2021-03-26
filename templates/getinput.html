@@ -11,9 +11,55 @@
     <!-- Bootstrap CSS -->
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" rel="stylesheet">
+
     <link href="{% static 'resume_maker/style.css' %}" rel="stylesheet">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+{#    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>#}
     <title>Protrainy Resume Builder</title>
+     <script>
+    $('input[name="current"]').click(function () {
+        if(this.checked) {
+            $('#id_left_dt').attr('type', 'text');
+            document.getElementById("id_left_dt").value = "Present";
+            $("#id_left_dt").attr("disabled", true);
+        }
+        else{
+                $('#id_left_dt').attr('type', 'date');
+
+                 $("#id_left_dt").attr("disabled", false);
+        }
+});
+    {#    $("#id_current").change(function() {#}
+    {#if(this.checked) {#}
+    {##}
+    {#    document.getElementById("id_current").addEventListener("click", function_t);#}
+    {##}
+    {#    function function_t() {#}
+    {##}
+    {##}
+    {##}
+            {#var target = document.getElementById("id_curr");#}
+    {#        var x = document.getElementById("id_left_dt");#}
+    {##}
+    {#            $('#id_left_dt').attr('type', 'text');#}
+    {#            document.getElementById("id_left_dt").value = "Present";#}
+    {#             $("#id_left_dt").attr("disabled", true);#}
+    {##}
+    {##}
+    {#        }}#}
+    {#    else {#}
+    {#         $('#id_left_dt').attr('type', 'date');#}
+    {##}
+    {#             $("#id_left_dt").attr("disabled", false);#}
+    {#    }#}
+    {##}
+    {##}
+    {#    }#}
+    {# );#}
+
+
+
+    </script>
 </head>
 <body style="min-width: 420px">
 

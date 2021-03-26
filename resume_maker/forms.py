@@ -18,10 +18,9 @@ class PersonForm(ModelForm):
         widgets = {
             'dob': DateInput(),
 
-
         }
         labels = {
-            'dob': 'Date of Birth',}
+            'dob': 'Date of Birth', }
 
 
 class EducationForm(ModelForm):
@@ -51,19 +50,22 @@ class ExperienceForm(ModelForm):
         # if Experience.current == True:
         #     w='Present'
         widgets = {
-            'current':forms.CheckboxInput(attrs={'name':'current',
-                                             'type':'checkbox',
-                                             'class':"checkboxinput form-check-input",
-                                             'id':'id_curr',
+            'current': forms.CheckboxInput(attrs={'name': 'current',
+                                                  'type': 'checkbox',
+                                                  'class': "checkboxinput form-check-input",
+                                                  'id': 'id_curr',
+                                                  'onchange': 'chapre(this)'
 
-                                                            }),
+                                                  }),
 
             'join_dt': DateInput(),
+            # 'left_dt': DateInput(),
             'left_dt': forms.DateInput(attrs={
                 'name': 'left_dt',
                 'type': 'date',
-                'class': "dateinput form-control",
+                'class': "dateinput form-control checkpro",
                 'id': 'id_left',
+
             }),
 
             'details': forms.Textarea(attrs={'placeholder': 'Max 250 words\nKeep it to 3-4 points'})
@@ -83,10 +85,12 @@ class ExperienceForm(ModelForm):
         #             Field('left_dt',id="id_left",css_class='sayam')
         #         )
 
+
 class SkillsForm(ModelForm):
     class Meta:
         model = SkillSet
         exclude = ('person',)
+
 
 class ProjectsForm(ModelForm):
     class Meta:
@@ -94,16 +98,18 @@ class ProjectsForm(ModelForm):
         exclude = ('person',)
         widgets = {
             'start_dt': DateInput(),
+            # 'end_dt': DateInput(),
             'end_dt': forms.DateInput(attrs={
                 'name': 'left_dt',
                 'type': 'date',
-                'class': "dateinput form-control",
+                'class': "dateinput form-control checkpro",
                 'id': 'id_left',
             }),
-            'running': forms.CheckboxInput(attrs={'name': 'runnin',
+            'running': forms.CheckboxInput(attrs={'name': 'running',
                                                   'type': 'checkbox',
                                                   'class': "checkboxinput form-check-input",
                                                   'id': 'id_curr',
+                                                  'onchange': 'chapre(this)'
 
                                                   }),
 
@@ -114,10 +120,12 @@ class ProjectsForm(ModelForm):
             'running': 'Currently Working on this project'
         }
 
+
 class LanguageForm(ModelForm):
     class Meta:
         model = Languages
         exclude = ('person',)
+
 
 class AchievementsForm(ModelForm):
     class Meta:
@@ -126,6 +134,7 @@ class AchievementsForm(ModelForm):
         widgets = {
             'achievement': forms.Textarea(attrs={'placeholder': 'Max 250 words\nKeep it to 3-4 points'})
         }
+
 
 class HobbiesForm(ModelForm):
     class Meta:
