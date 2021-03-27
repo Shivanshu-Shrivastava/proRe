@@ -103,6 +103,40 @@ def get_input(request):
         print(first)
     return render(request, "getinput.html", {"form": form, "show": first, "person": person})
 
+# edit and delete personal details #
+
+def getipedit(request,id):
+    global first
+    instance = Person.objects.get(id=id)
+    edit = Person.objects.filter(id=id)
+    print(instance)
+    first =  False
+    if request.method == "POST":
+        edit_form = PersonForm(request.POST or None, instance=instance)
+        if edit_form.is_valid():
+            cd = edit_form.cleaned_data
+            first_name = cd.get('first_name')
+            middle_name = cd.get('middle_name')
+            last_name = cd.get('last_name')
+            email = cd.get('email')
+            mobile_no = cd.get('mobile_no')
+            age = cd.get('age')
+            dob = cd.get('dob')
+            address = cd.get('address')
+            github = cd.get('github')
+            linkedin = cd.get('linkedin')
+            website = cd.get('website')
+            # data = Education(qualification=qualification, institution=institution, board=board, start_yr=start_yr, end_yr=end_yr, cgpa=cgpa, percent=percent, person=person)
+            edit.update(first_name = first_name, middle_name = middle_name, last_name = last_name, email = email, mobile_no = mobile_no, age = age, dob = dob, address = address, github= github, linkedin = linkedin, website= website)
+    else:
+        edit_form = PersonForm(instance=instance)
+    return redirect('/getinput')
+
+def getipdel(request,id):
+    delete = Person.objects.filter(id=id)
+    delete.delete()
+    return redirect('/getinput')
+
 # # person edit del
 #
 # def getedit(request, id):
