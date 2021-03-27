@@ -31,12 +31,10 @@
         </aside>
         <section class="col-md-9 my-4 col-sm-12">
             <div class="container">
-                <div class="shadow p-2  rounde  my-4 bg-lggr d-flex flex-wrap  justify-content-center linergra"
-                >
-                    <h3 class="m-2 text-center font-weight-bold">Work Experience <br><span
-                            class="optional">(Optional)</span></h3>
-                </div>
-                <hr class="mx-auto "/>
+                <div class="shadow p-2  rounde my-4 bg-lggr d-flex flex-wrap  justify-content-center linergra">
+            <h3 class=" text-center font-weight-bold  family">Work Experience<br><span class="optional">(Optional)</span></h3>
+        </div>
+        <hr class="mx-auto "/>
 
                 {% with count=1 %}
                     {% for i in data %}
@@ -53,9 +51,9 @@
 
                                     </div>
                                     <div class="d-flex flex-column col col-md-5 ">
-                                        <h6 class="text-capitalize">{{ i.type }}</h6>
-                                        <h6 class="text-capitalize">{{ i.company }}</h6>
-                                        <h6 class="text-capitalize">{{ i.role }}</h6>
+                                        <h6 class="">{{ i.type }}</h6>
+                                        <h6 class="">{{ i.company }}</h6>
+                                        <h6 class="">{{ i.role }}</h6>
 
                                         {% if i.left_dt != None %}
                                             <h6 class="text-capitalize">{{ i.join_dt }} - {{ i.left_dt }}</h6>
@@ -64,7 +62,7 @@
                                             <h6 class="text-capitalize">{{ i.join_dt }} - Present</h6>
                                         {% endif %}
                                         {% if i.details != None and i.details != '' %}
-                                            <h6 class="text-capitalize adjusttext text-justify">{{ i.details }}</h6>
+                                            <h6 class=" adjusttext text-justify">{{ i.details }}</h6>
                                         {% endif %}
                                     </div>
                                     <div class="d-flex flex-column flex-wrap my-4" style="max-width: 200px">
@@ -113,7 +111,136 @@
                                             <div class="container shadow-sm  rounded whitesm  mx-auto">
                                                 <form class="d-flex flex-column flex-wrap " id="myForm" method="post"
                                                       action="/work/edit/{{ i.id }}">{% csrf_token %}
-                                                    {{ exp | crispy }}
+{#                                                    <form class="d-flex flex-column flex-wrap " method="post"><input#}
+{#                                                            type="hidden" name="csrfmiddlewaretoken"#}
+{#                                                            value="c9cM99Yc0eCsyNtTeFprVQPO50x3qvOD8JcKLaU0Qqxg7aXhx6xdELA88An6mXuz">#}
+
+
+                                                        <div id="div_id_type" class="form-group"><label for="id_type"
+                                                                                                        class=" requiredField">
+                                                            Type<span class="asteriskField">*</span> </label>
+                                                            <div class=""><select name="type"
+                                                                                  class="select form-control"
+                                                                                  required="" id="id_type">
+                                                                <option value="" selected="">{{ i.type }}</option>
+                                                                <option value="Job">Job</option>
+                                                                <option value="Internship">Internship</option>
+
+                                                            </select></div>
+                                                        </div>
+                                                        <div id="div_id_company" class="form-group"><label
+                                                                for="id_company" class=" requiredField">
+                                                            Company<span class="asteriskField">*</span> </label>
+                                                            <div class=""><input type="text" name="company"
+                                                                                 value="{{ i.company }}" maxlength="150"
+                                                                                 class="textinput textInput form-control"
+                                                                                 required="" id="id_company"></div>
+                                                        </div>
+                                                        <div id="div_id_role" class="form-group"><label for="id_role"
+                                                                                                        class=" requiredField">
+                                                            Role<span class="asteriskField">*</span> </label>
+                                                            <div class=""><input type="text" name="role" maxlength="270"
+                                                                              value="{{ i.role }}"   class="textinput textInput form-control"
+                                                                                 required="" id="id_role"></div>
+                                                        </div>
+                                                        <div id="div_id_join_dt" class="form-group"><label
+                                                                for="id_join_dt" class=" requiredField">
+                                                            Join Date<span class="asteriskField">*</span> </label>
+                                                            <div class=""><input type="date" name="join_dt"
+                                                                              value="{{ i.join_dt }}"   class="dateinput form-control"
+                                                                                 required="" id="id_join_dt"></div>
+                                                        </div>
+                                                        <div id="div_id_left_dt" class="form-group"><label for="id_left"
+                                                                                                           class="">
+                                                            Left Date
+                                                        </label>
+                                                            <div class=""><input type="date" name="left_dt"
+                                                                                 value="{{ i.left_dt }}" class="dateinput form-control checkpro form-control"
+                                                                                 id="id_left"></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div id="div_id_current" class="form-check"><input
+                                                                    type="checkbox" name="current"
+                                                                    class="checkboxinput form-check-input form-check-input"
+                                                                    id="id_curr" onchange="chapre(this)"> <label
+                                                                    for="id_curr" class="form-check-label">
+                                                                Currently Working Here
+                                                            </label></div>
+                                                        </div>
+                                                        <div id="div_id_details" class="form-group"><label
+                                                                for="id_details" class=" requiredField">
+                                                            Details<span class="asteriskField">*</span> </label>
+                                                            <div class=""> <textarea name="details" cols="40" rows="10"
+                                                                                     placeholder="Max 250 words
+Keep it to 3-4 points" class="textarea form-control" required="" id="id_details">{{ i.details }}</textarea></div>
+                                                        </div>
+
+                                                        <!--<div class="form-group mx-5">
+                                                    <label class="" for="exampleFormControlSelect1">Work Type</label>
+                                                    <select class="form-control family whitesm" id="exampleFormControlSelect1">
+                                                        <option class="family">Job</option>
+                                                        <option class="family">Internship</option>
+
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group mx-5">
+                                                    <label class="family " for="exampleFormControlInput1 ">Profile</label>
+                                                    <input required name="profile" class="whitesm form-control inputt "
+                                                           id="exampleFormControlInput1"
+                                                           placeholder="e.g. Software Developer"
+                                                           type="text">
+                                                </div>
+                                                <div class="form-group mx-5">
+                                                    <label class="family " for="exampleFormControlInput1 ">Company Name</label>
+                                                    <input required name="" class="whitesm form-control inputt "
+                                                           id="exampleFormControlInput1"
+                                                           placeholder="e.g. Protrainy"
+                                                           type="text">
+                                                </div>
+
+
+
+
+
+
+
+
+                                                <div class="form-group mx-5">
+                                                    <label class="family" for="exampleFormControlInput1">Start Date</label>
+                                                    <input required name="" class=" whitesm form-control inputt"
+                                                           id="exampleFormControlInput1"
+                                                           placeholder=""
+                                                           type="date">
+                                                </div>
+                                                <div class="form-group mx-5">
+                                                    <label class="family" for="exampleFormControlInput1">End Date</label>
+                                                    <input required name="" class=" whitesm form-control inputt"
+                                                           id="exampleFormControlInput1"
+                                                           placeholder="Present"
+                                                           type="date">
+                                                </div>
+                                                <div class="form-check form-group form-check-inline mx-5">
+                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
+                                                           value="option1">
+                                                    <label class="form-check-label" for="inlineCheckbox1">Currently working
+                                                        here.</label>
+                                                </div>
+
+                                                <div class="form-group mx-5">
+                                                    <label class="family"
+                                                           for="exampleFormControlTextarea1">Description</label>
+                                                    <textarea required name="description" class="form-control whitesm inputt"
+                                                              placeholder="Max char. 250" id="exampleFormControlTextarea1"
+                                                              maxlength="250" rows="5"></textarea>
+                                                </div>-->
+                                                        <div class="align-self-center ">
+                                                            <button class="butn butn-bg px-3 py-2 "
+                                                                    style="border-radius: 1rem;" type="submit">
+                                                                <span>Save</span>
+                                                            </button>
+                                                        </div>
+                                                    </form>
 
                                                     <!--<div class="form-group mx-5">
                                                     <label class="family "
@@ -140,14 +267,14 @@
                                                               id="exampleFormControlTextarea1"
                                                               rows="5"></textarea>
                                                 </div>-->
-                                                    <div class="align-self-center ">
-                                                        <button class="butn butn-bg px-3 py-2"
-                                                                style="border-radius: 1rem;"
-                                                                type="submit">
-                                                            <span> Save</span>
-                                                        </button>
-                                                    </div>
-                                                </form>
+{#                                                    <div class="align-self-center ">#}
+{#                                                        <button class="butn butn-bg px-3 py-2"#}
+{#                                                                style="border-radius: 1rem;"#}
+{#                                                                type="submit">#}
+{#                                                            <span> Save</span>#}
+{#                                                        </button>#}
+{#                                                    </div>#}
+{#                                                </form>#}
                                             </div>
                                         </div>
                                     </div>
@@ -347,11 +474,11 @@
 
 
             } else {
-                 //when not checked
+                //when not checked
                 {#$(x).attr('type', 'date');#}
                 var k = document.getElementsByClassName('checkpro');
                 var l;
-                   for (l = 0; l < k.length; l++) {
+                for (l = 0; l < k.length; l++) {
                     $(k[l]).attr('type', 'date');
                     $(k[l]).attr("disabled", false);
                 }

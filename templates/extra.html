@@ -32,8 +32,9 @@
         <section class="col-md-9 my-4 col-sm-12">
             <div class="container">
                 <div class="shadow p-2  rounde  my-4 bg-lggr d-flex flex-wrap  justify-content-center linergra"
-                     >
-                    <h3 class="m-2 text-center font-weight-bold">Academic Achievents And Awards<br><span class="optional">(Optional)</span></h3>
+                >
+                    <h3 class="m-2 text-center font-weight-bold">Academic Achievents And Awards<br><span
+                            class="optional">(Optional)</span></h3>
                 </div>
                 <hr class="mx-auto "/>
 
@@ -92,7 +93,34 @@
                                             <div class="container shadow-sm  rounded whitesm  mx-auto">
                                                 <form class=" d-flex flex-column flex-wrap" method="post"
                                                       action="extra/edit/{{ i.id }}">{% csrf_token %}
-                                                    {{ ach | crispy }}
+{#                                                    <form class=" d-flex flex-column flex-wrap" method="post"><input#}
+{#                                                            type="hidden" name="csrfmiddlewaretoken"#}
+{#                                                            value="Ser8mJyFaKibPEO4NBnrZJyVqER6qNs6OOr6YKut0WdZo1is62vdIEjfteH9mf82">#}
+
+
+                                                        <div id="div_id_achievement" class="form-group"><label
+                                                                for="id_achievement" class=" requiredField">
+                                                            Achievement<span class="asteriskField">*</span> </label>
+                                                            <div class=""> <textarea name="achievement" cols="40"
+                                                                                     rows="10" placeholder="Max 250 words
+Keep it to 3-4 points" class="textarea form-control" required="" id="id_achievement">{{ i.achievement }}</textarea></div>
+                                                        </div>
+
+                                                        <!--<div class="form-group mx-5">
+                                                            <label class="family" for="exampleFormControlTextarea1">Academic
+                                                                Achievents And Awards</label>
+                                                            <textarea name="academic" class="form-control whitesm inputt"
+                                                                      id="exampleFormControlTextarea1"
+                                                                      rows="5"></textarea>
+                                                        </div>-->
+
+
+                                                        <div class="align-self-center ">
+                                                            <button class="butn-bg butn px-3 py-2 "
+                                                                    style="border-radius: 1rem;" type="submit"><span>Save</span>
+                                                            </button>
+                                                        </div>
+                                                    </form>
 
                                                     <!--<div class="form-group mx-5">
                                                         <label class="family" for="exampleFormControlTextarea1">Academic
@@ -102,14 +130,14 @@
                                                                   id="exampleFormControlTextarea1"
                                                                   rows="5"></textarea>
                                                     </div>-->
-                                                    <div class="align-self-center ">
-                                                        <button class="butn-bg butn px-3 py-2"
-                                                                style="border-radius: 1rem;"
-                                                                type="submit">
-                                                            <span>  Save</span>
-                                                        </button>
-                                                    </div>
-                                                </form>
+{#                                                    <div class="align-self-center ">#}
+{#                                                        <button class="butn-bg butn px-3 py-2"#}
+{#                                                                style="border-radius: 1rem;"#}
+{#                                                                type="submit">#}
+{#                                                            <span>  Save</span>#}
+{#                                                        </button>#}
+{#                                                    </div>#}
+{#                                                </form>#}
                                             </div>
                                         </div>
                                     </div>

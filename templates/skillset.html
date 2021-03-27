@@ -31,8 +31,8 @@
         <section class="col-md-9 my-4 col-sm-12">
             <div class="container">
                 <div class="shadow p-2  rounde  my-4 bg-lggr d-flex flex-wrap  justify-content-center linergra"
-                    >
-                    <h3 class="m-2 text-center font-weight-bold">Skills<br><span class="optional" >(Optional)</span></h3>
+                >
+                    <h3 class="m-2 text-center font-weight-bold">Skills<br><span class="optional">(Optional)</span></h3>
                 </div>
                 <hr class="mx-auto "/>
                 {% with count=1 %}
@@ -94,8 +94,48 @@
                                             <div class="container shadow-sm  rounded whitesm  mx-auto">
                                                 <form class="d-flex flex-column flex-wrap " method="post"
                                                       action="skills/edit/{{ i.id }}">{% csrf_token %}
-                                                    {{ skill | crispy }}
+                                                    {#                                                  <form class="d-flex flex-column flex-wrap " method="post"><input type="hidden" name="csrfmiddlewaretoken" value="joETNRfm8X5nWrQoVhK4kXBoo65k4mbwfYERpSbaY90bvOkMeISQ3SmIrGVn0ORs">#}
+
+
+                                                    <div id="div_id_skill" class="form-group"><label for="id_skill"
+                                                                                                     class=" requiredField">
+                                                        Skill<span class="asteriskField">*</span> </label>
+                                                        <div class=""><input type="text" name="skill" maxlength="25"
+                                                                           value="{{ i.skill }}"  class="textinput textInput form-control"
+                                                                             required="" id="id_skill"></div>
+                                                    </div>
+                                                    <div id="div_id_experience" class="form-group"><label
+                                                            for="id_experience" class=" requiredField">
+                                                        Experience<span class="asteriskField">*</span> </label>
+                                                        <div class=""><select name="experience"
+                                                                              class="select form-control" required=""
+                                                                              id="id_experience">{{ i.experience }}
+{#                                                            <option value="" selected="">-------</option>#}
+                                                            <option value="Beginner">Beginner</option>
+                                                            <option value="Intermediate">Intermediate</option>
+                                                            <option value="Advanced">Advanced</option>
+
+                                                        </select></div>
+                                                    </div>
+
                                                     <!--<div class="form-group mx-5">
+                                                        <label class="family" for="exampleFormControlInput1 ">Skill</label>
+                                                        <input required name="" class="whitesm form-control inputt "
+                                                               id="exampleFormControlInput1"
+                                                               placeholder="e.g. Graphic Design"
+                                                               type="text">
+                                                    </div>-->
+
+                                                    <div class="align-self-center ">
+                                                        <button class="butn butn-bg px-3 py-2"
+                                                                style="border-radius: 1rem;" type="submit">
+                                                            <span>Save</span>
+                                                        </button>
+                                                    </div>
+
+
+                                                </form>
+                                                <!--<div class="form-group mx-5">
                                                     <label class="family " for="exampleFormControlInput1 ">Position and
                                                         Event</label>
                                                     <input value="{{ i.first }}" name="position"
@@ -121,14 +161,14 @@
                                                               rows="5"></textarea>
                                                 </div>-->
 
-                                                    <div class="align-self-center ">
-
-                                                        <button class="butn-bg butn px-3 py-2"
-                                                                style="border-radius: 1rem;"
-                                                                type="submit"><span>Save</span>
-                                                        </button>
-                                                    </div>
-                                                </form>
+{#                                                <div class="align-self-center ">#}
+{##}
+{#                                                    <button class="butn-bg butn px-3 py-2"#}
+{#                                                            style="border-radius: 1rem;"#}
+{#                                                            type="submit"><span>Save</span>#}
+{#                                                    </button>#}
+{#                                                </div>#}
+{#                                                </form>#}
                                             </div>
                                         </div>
                                     </div>

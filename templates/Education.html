@@ -37,100 +37,245 @@
         </aside>
         <section class="col-md-9 my-4 col-sm-12">
             <section class="container">
-                <div class="shadow p-2  rounde  my-4 bg-lggr d-flex flex-wrap  justify-content-center linergra"
-                     >
-                    <h3 class="m-2 text-center font-weight-bold">Education</h3>
-                </div>
-                <hr class="mx-auto  "/>
-            {% if show == False %}
-                {% for i in data %}
-                    <div id="del{{ forloop.counter }}">
-                        <div class="alert alert-warning" role="alert">
-                            <div class="d-flex justify-content-around flex-wrap ">
-                                <div class="d-flex flex-column justify-content-between flex-wrap ">
-                                    <h6 class="text-capitalize">Degree</h6>
-                                    <h6 class="text-capitalize">Start Year</h6>
-                                    <h6 class="text-capitalize">End Year</h6>
-                                    <h6 class="text-capitalize">Institute</h6>
-                                    <h6 class="text-capitalize">Board</h6>
-                                    <h6 class="text-capitalize">Score</h6>
-                                </div>
-                                <div class="d-flex flex-column justify-content-between flex-wrap ">
-                                    <h6 class="text-capitalize">{{ i.qualification }}</h6>
-                                    <h6 class="text-capitalize">{{ i.start_yr }}</h6>
-                                    <h6 class="text-capitalize">{{ i.end_yr }}</h6>
-                                    <h6 class="text-capitalize">{{ i.institution }}</h6>
-                                    <h6 class="text-capitalize">{{ i.board }}</h6>
-                                    <h6 class="text-capitalize">
-                                        {% if i.cgpa is None %}{{ i.percent }}{% else %}{{ i.cgpa }}{% endif %}</h6>
-                                </div>
-                                <div class="d-flex flex-column flex-wrap my-4" style="max-width: 200px">
-                                    {#                <button class="mx-3  " data-target="#exampleModalCenter{{ count }}"#}
-                                    {#                        data-toggle="modal" style="border-radius: 4rem;"#}
-                                    {#                        type="button">#}
-                                    <svg data-toggle="modal" data-target="#exampleModalCenter{{ forloop.counter }}"
-                                         xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                         class="bi bi-pencil-square " viewBox="0 0 16 16">
-                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                        <path fill-rule="evenodd"
-                                              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                    </svg>
-                                    {#                </button>#}
-                                    {#                <button class="mx-3 " data-target="#exampleModalCentererse{{ count }}"#}
-                                    {#                        data-toggle="modal" style="border-radius: 4rem;"#}
-                                    {#                        type="button" onclick="erasedata()">#}
-                                    <a href="education/{{ i.id }}">
-                                        <svg data-toggle="modal"
+                <div class="shadow p-2  rounde my-4 bg-lggr d-flex flex-wrap  justify-content-center linergra">
+            <h3 class=" text-center font-weight-bold  family">Education</h3>
+        </div>
+        <hr class="mx-auto "/>
+{#                {% if show == False %}#}
+                    {% for i in data %}
+                        <div id="del{{ forloop.counter }}">
+                            <div class="alert alert-warning" role="alert">
+                                <div class="d-flex justify-content-around row ">
+                                    <div class="d-flex flex-column justify-content-between col col-md-3 ">
+                                        <h6 class="text-capitalize">Degree</h6>
+                                        <h6 class="text-capitalize">Start Year</h6>
+                                        <h6 class="text-capitalize">End Year</h6>
+                                        <h6 class="text-capitalize">Institute</h6>
+                                        <h6 class="text-capitalize">Board</h6>
+                                        <h6 class="text-capitalize">Score</h6>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-between col col-md-5 ">
+                                        <h6 class="text-capitalize">{{ i.qualification }}</h6>
+                                        <h6 class="text-capitalize">{{ i.start_yr }}</h6>
+                                        <h6 class="text-capitalize">{{ i.end_yr }}</h6>
+                                        <h6 class="text-capitalize">{{ i.institution }}</h6>
+                                        <h6 class="text-capitalize">{{ i.board }}</h6>
+                                        <h6 class="text-capitalize">
+                                            {% if i.cgpa is None %}{{ i.percent }}{% else %}{{ i.cgpa }}{% endif %}</h6>
+                                    </div>
+                                    <div class="d-flex flex-column flex-wrap my-4" style="max-width: 200px">
+                                        {#                <button class="mx-3  " data-target="#exampleModalCenter{{ count }}"#}
+                                        {#                        data-toggle="modal" style="border-radius: 4rem;"#}
+                                        {#                        type="button">#}
+                                        <svg data-toggle="modal" data-target="#exampleModalCenter{{ forloop.counter }}"
                                              xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                              fill="currentColor"
-                                             class="bi bi-trash mt-3" viewBox="0 0 16 16">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                             class="bi bi-pencil-square " viewBox="0 0 16 16">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                             <path fill-rule="evenodd"
-                                                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                         </svg>
-                                    </a>
+                                        {#                </button>#}
+                                        {#                <button class="mx-3 " data-target="#exampleModalCentererse{{ count }}"#}
+                                        {#                        data-toggle="modal" style="border-radius: 4rem;"#}
+                                        {#                        type="button" onclick="erasedata()">#}
+                                        <a href="education/{{ i.id }}">
+                                            <svg data-toggle="modal"
+                                                 xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                 fill="currentColor"
+                                                 class="bi bi-trash mt-3" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                <path fill-rule="evenodd"
+                                                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
 
-                        <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade mow"
-                             id="exampleModalCenter{{ forloop.counter }}"
-                             role="dialog" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content ">
-                                    <div class="modal-header whitesm ">
-                                        <h5 class="modal-title " id="exampleModalCenterTitle">Education</h5>
-                                        <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body whitesm ">
-                                        <div class="container shadow-sm  rounded whitesm  mx-auto">
-                                            <form class="d-flex flex-column flex-wrap" method="post"
-                                                  action="/education/edit/{{ i.id }}">{% csrf_token %}
-                                                {{ edu | crispy }}
-
-                                                <div class="align-self-center">
-                                                    <button class="butn butn-bg px-3 py-2" style="border-radius: 1rem;">
-                                                        <span> Save</span>
-                                                    </button>
-                                                </div>
+                            <div aria-hidden="true" aria-labelledby="exampleModalCenterTitle" class="modal fade mow"
+                                 id="exampleModalCenter{{ forloop.counter }}"
+                                 role="dialog" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content ">
+                                        <div class="modal-header whitesm ">
+                                            <h5 class="modal-title " id="exampleModalCenterTitle">Education</h5>
+                                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body whitesm ">
+                                            <div class="container shadow-sm  rounded whitesm  mx-auto">
+                                                <form class="d-flex flex-column flex-wrap" method="post"
+                                                      action="/education/edit/{{ i.id }}">{% csrf_token %}
+{#                                                                                                    {{ edu | crispy }}#}
+{#                                                    <form class="d-flex flex-column flex-wrap " method="post">{% csrf_token %}#}
+{#                                                        <input#}
+{#                                                            type="hidden" name="csrfmiddlewaretoken"#}
+{#                                                            value="uGu1CDUguVUFzQzni9NdvgrdJqJxJvSDqguZeEQ4k7Pt8d3LBAVZebcxM0zAFXyz">#}
 
 
-                                            </form>
+                                                        <div id="div_id_qualification" class="form-group"><label
+                                                                for="id_qualification" class=" requiredField">
+                                                            Qualification<span class="asteriskField">*</span> </label>
+                                                            <div class=""><select name="qualification"
+                                                                                  class="select form-control"
+                                                                                  required="" id="id_qualification">
+                                                                <option value="{{ i.qualification }}" >{{ i.qualification }}</option>
+                                                                <option value="PhD">PhD</option>
+                                                                <option value="Masters">Masters</option>
+                                                                <option value="Bachelors">Bachelors</option>
+                                                                <option value="High School">High School</option>
+
+                                                            </select></div>
+                                                        </div>
+                                                        <div id="div_id_status" class="form-group"><label
+                                                                for="id_status" class=" requiredField">
+                                                            Status<span class="asteriskField">*</span> </label>
+                                                            <div class=""><select name="status"
+                                                                                  class="select form-control"
+                                                                                  required="" id="id_status">{{ i.status }}
+{#                                                                <option value="" selected="">---------</option>#}
+                                                                <option value="Pursuing">Pursuing</option>
+                                                                <option value="Completed">Completed</option>
+
+                                                            </select></div>
+                                                        </div>
+                                                        <div id="div_id_institution" class="form-group"><label
+                                                                for="id_institution" class=" requiredField">
+                                                            Institution<span class="asteriskField">*</span> </label>
+                                                            <div class=""><input type="text" name="institution"
+                                                                                 maxlength="75"
+                                                                                 class="textinput textInput form-control"
+                                                                                 value="{{ i.institution }}" required="" id="id_institution"></div>
+                                                        </div>
+                                                        <div id="div_id_board" class="form-group"><label for="id_board"
+                                                                                                         class=" requiredField">
+                                                            Board<span class="asteriskField">*</span> </label>
+                                                            <div class=""><input type="text" name="board" maxlength="75"
+                                                                                value="{{ i.board }}" class="textinput textInput form-control"
+                                                                                 required="" id="id_board"></div>
+                                                        </div>
+                                                        <div id="div_id_start_yr" class="form-group"><label
+                                                                for="id_start_yr" class=" requiredField">
+                                                            Start Year<span class="asteriskField">*</span> </label>
+                                                            <div class=""><input type="date" name="start_yr"
+                                                                               value="{{ i.start_yr }}"  class="dateinput form-control"
+                                                                                 required="" id="id_start_yr"></div>
+                                                        </div>
+                                                        <div id="div_id_end_yr" class="form-group"><label
+                                                                for="id_end_yr" class=" requiredField">
+                                                            End Year<span class="asteriskField">*</span> </label>
+                                                            <div class=""><input type="date" name="end_yr"
+                                                                              value="{{ i.end_yr }}"   class="dateinput form-control"
+                                                                                 required="" id="id_end_yr"></div>
+                                                        </div>
+                                                        <div id="div_id_cgpa" class="form-group"><label for="id_cgpa"
+                                                                                                        class="">
+                                                            CGPA
+                                                        </label>
+                                                            <div class=""><input type="number" name="cgpa" step="any"
+                                                                               value="{{ i.cgpa }}"  class="numberinput form-control"
+                                                                                 id="id_cgpa"></div>
+                                                        </div>
+                                                        <div id="div_id_percent" class="form-group"><label
+                                                                for="id_percent" class="">
+                                                            Percentage
+                                                        </label>
+                                                            <div class=""><input type="number" name="percent" step="any"
+                                                                                value="{{ i.percent }}" class="numberinput form-control"
+                                                                                 id="id_percent"></div>
+                                                        </div>
+
+                                                        <!--div class="row mx-1 my-3">
+                                                            <div class="mx-5 custom-control custom-radio custom-control-inline">
+                                                                <input class="whitesm  custom-control-input" id="customRadioInline1"
+                                                                       name="customRadioInline1"
+                                                                       onclick="pursu()" type="radio">
+                                                                <label class="custom-control-label"
+                                                                       for="customRadioInline1">Pursuing</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio custom-control-inline mx-5 ">
+                                                                <input class="custom-control-input whitesm " id="customRadioInline2"
+                                                                       name="customRadioInline1"
+                                                                       onclick="comple()" type="radio">
+                                                                <label class="custom-control-label"
+                                                                       for="customRadioInline2">Completed</label>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group mx-5">
+                                                            <label class="family"
+                                                                   for="exampleFormControlSelect1">Degree</label>
+                                                            <input class="form-control inputt whitesm " id="exampleFormControlInput1"
+                                                                   name="degree"
+                                                                   placeholder="e.g. MBA"
+                                                                   required
+                                                                   type="text">
+                                                        </div>
+                                                        <div class="form-group mx-5">
+                                                            <label class="family" for="exampleFormControlInput1">Start
+                                                                Year</label>
+                                                            <input class="form-control inputt whitesm " id="exampleFormControlInput1"
+                                                                   name="syear"
+                                                                   placeholder=""
+                                                                   required
+                                                                   type="month">
+                                                        </div>
+                                                        <div class="form-group mx-5" id="pursuing_Par">
+                                                            <label class="family" for="exampleFormControlInput1"><span
+                                                                    id="pursuing_Chi">Expected End Year</span> </label>
+                                                            <input class="whitesm  form-control inputt" id="exampleFormControlInput1"
+                                                                   name="eyear"
+                                                                   placeholder=""
+                                                                   required
+                                                                   type="month">
+                                                        </div>
+
+                                                        <div class="form-group mx-5">
+                                                            <label class="family"
+                                                                   for="exampleFormControlInput1">Institute</label>
+                                                            <input class=" whitesm  form-control inputt" id="exampleFormControlInput1"
+                                                                   name="institute"
+                                                                   placeholder="Your Institute"
+                                                                   required
+                                                                   type="text">
+                                                        </div>
+                                                        <div class="form-group mx-5">
+                                                            <label class="family" for="exampleFormControlInput1">Score</label>
+                                                            <input class="form-control inputt whitesm " id="exampleFormControlInput1"
+                                                                   name="score"
+                                                                   placeholder="In PERCENTAGE"
+                                                                   required
+                                                                   type="number">
+                                                        </div>-->
+
+                                                        <div class="align-self-center ">
+
+                                                            <button class="butn butn-bg px-3 py-2"
+                                                                    style="border-radius: 1rem;" type="submit"><span>Save</span>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+
+
+
+
+
+                                            </div>
+
+
                                         </div>
 
-
                                     </div>
-
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                {% endfor %}
-                {% endif %}
+                    {% endfor %}
+{#                {% endif %}#}
 
                 <div class=" my-4">
                     <div class=" ">
@@ -257,13 +402,13 @@
                                         </button>
                                     </a>
 
-                                        <a class="  " href="work">
-                                            <button class="butn butn-bg px-3 py-2" style="border-radius: 1rem;"
-                                                    type="submit"
-                                            >
-                                                <span>Next</span>
-                                            </button>
-                                        </a>
+                                    <a class="  " href="work">
+                                        <button class="butn butn-bg px-3 py-2" style="border-radius: 1rem;"
+                                                type="submit"
+                                        >
+                                            <span>Next</span>
+                                        </button>
+                                    </a>
 
 
                                 </div>
