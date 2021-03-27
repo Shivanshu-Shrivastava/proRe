@@ -18,7 +18,7 @@
                 <a href="project" class="whitesm list-group-item  fullbox "><span class=" headcolor text-justify">Projects</span></a>
                 <a href="extra" class="whitesm list-group-item  fullbox "><span class=" headcolor text-justify">Acadmic Achievents and Awards</span></a>
             </div>
-            {#        <div class="d-flex flex-column my-5">#}
+          <!--    {#        <div class="d-flex flex-column my-5">#}
             {#           <div class="borderr py-2 hoverper">#}
             {#            <div class="  mx-3">#}
             {##}
@@ -27,7 +27,7 @@
             {#            </div>#}
             {#           </div>#}
             {##}
-            {#        </div>#}
+            {#        </div>#}-->
         </aside>
         <section class="col-md-9 my-4 col-sm-12">
             <div class="container">
@@ -66,9 +66,9 @@
                                         {% endif %}
                                     </div>
                                     <div class="d-flex flex-column flex-wrap my-4" style="max-width: 200px">
-                                        {#                <button class="mx-3  " data-target="#exampleModalCenter{{ count }}"#}
+                                      <!--    {#                <button class="mx-3  " data-target="#exampleModalCenter{{ count }}"#}
                                         {#                        data-toggle="modal" style="border-radius: 4rem;"#}
-                                        {#                        type="button">#}
+                                        {#                        type="button">#-->
                                         <svg data-toggle="modal" data-target="#exampleModalCenter{{ forloop.counter }}"
                                              xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                              fill="currentColor"
@@ -77,10 +77,10 @@
                                             <path fill-rule="evenodd"
                                                   d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                         </svg>
-                                        {#                </button>#}
+                                        <!--  {#                </button>#}
                                         {#                <button class="mx-3 " data-target="#exampleModalCentererse{{ count }}"#}
                                         {#                        data-toggle="modal" style="border-radius: 4rem;"#}
-                                        {#                        type="button" onclick="erasedata()">#}
+                                        {#                        type="button" onclick="erasedata()">#}-->
                                         <a href="/work/{{ i.id }}">
                                             <svg data-toggle="modal"
                                                  xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -91,7 +91,7 @@
                                                       d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                                             </svg>
                                         </a>
-                                        {#                </button>#}
+                                         <!-- {#                </button>#}-->
                                     </div>
                                 </div>
                             </div>
@@ -111,9 +111,9 @@
                                             <div class="container shadow-sm  rounded whitesm  mx-auto">
                                                 <form class="d-flex flex-column flex-wrap " id="myForm" method="post"
                                                       action="/work/edit/{{ i.id }}">{% csrf_token %}
-{#                                                    <form class="d-flex flex-column flex-wrap " method="post"><input#}
+ <!-- {#                                                   <form class="d-flex flex-column flex-wrap " method="post"><input#}
 {#                                                            type="hidden" name="csrfmiddlewaretoken"#}
-{#                                                            value="c9cM99Yc0eCsyNtTeFprVQPO50x3qvOD8JcKLaU0Qqxg7aXhx6xdELA88An6mXuz">#}
+{#                                                            value="c9cM99Yc0eCsyNtTeFprVQPO50x3qvOD8JcKLaU0Qqxg7aXhx6xdELA88An6mXuz">#} -->
 
 
                                                         <div id="div_id_type" class="form-group"><label for="id_type"
@@ -267,14 +267,14 @@ Keep it to 3-4 points" class="textarea form-control" required="" id="id_details"
                                                               id="exampleFormControlTextarea1"
                                                               rows="5"></textarea>
                                                 </div>-->
-{#                                                    <div class="align-self-center ">#}
+ <!-- {#                                                    <div class="align-self-center ">#}
 {#                                                        <button class="butn butn-bg px-3 py-2"#}
 {#                                                                style="border-radius: 1rem;"#}
 {#                                                                type="submit">#}
 {#                                                            <span> Save</span>#}
 {#                                                        </button>#}
 {#                                                    </div>#}
-{#                                                </form>#}
+{#                                                </form>#}-->
                                             </div>
                                         </div>
                                     </div>
@@ -292,7 +292,7 @@ Keep it to 3-4 points" class="textarea form-control" required="" id="id_details"
                                 data-target="#exampleModalCenter"
                                 style="border-radius: 4rem;" data-toggle="modal"
                                 type="button">
-                            {#                            {% with request.method='get' %}#}
+                           <!--   {#                            {% with request.method='get' %}#}-->
 
                             <span>  + Add Work Experience</span>
 
@@ -416,48 +416,7 @@ Keep it to 3-4 points" class="textarea form-control" required="" id="id_details"
         </section>
     </main>
     <script>
-        {#$('input[name="current"]').click(function () {#}
-        {#    if(this.checked) {#}
-        {#        $('#id_left').attr('type', 'text');#}
-        {#        document.getElementById("id_left").value = "Present";#}
-        {#        $("#id_left").attr("disabled", true);#}
-        {#    }#}
-        {#    else{#}
-        {#            $('#id_left_dt').attr('type', 'date');#}
-        {##}
-        {#             $("#id_left_dt").attr("disabled", false);#}
-        {#    }});#}
-        {#document.getElementById("id_current").addEventListener("click", function_t);#}
-        {#function function_t(){#}
-        {#    alert('checked')}#}
-        {##}
-        {#    $("#id_current").change(function() {#}
-        {#if(this.checked) {#}
-        {##}
-        {#    document.getElementById("id_current").addEventListener("click", function_t);#}
-        {##}
-        {#    function function_t() {#}
-        {##}
-        {##}
-        {##}
-        {#var target = document.getElementById("id_curr");#}
-        {#        var x = document.getElementById("id_left_dt");#}
-        {##}
-        {#            $('#id_left_dt').attr('type', 'text');#}
-        {#            document.getElementById("id_left_dt").value = "Present";#}
-        {#             $("#id_left_dt").attr("disabled", true);#}
-        {##}
-        {##}
-        {#        }}#}
-        {#    else {#}
-        {#         $('#id_left_dt').attr('type', 'date');#}
-        {##}
-        {#             $("#id_left_dt").attr("disabled", false);#}
-        {#    }#}
-        {##}
-        {##}
-        {#    }#}
-        {# );#}
+
 
         function chapre(obj) {
             if ($(obj).is(":checked")) {
@@ -475,20 +434,19 @@ Keep it to 3-4 points" class="textarea form-control" required="" id="id_details"
 
             } else {
                 //when not checked
-                {#$(x).attr('type', 'date');#}
+                
                 var k = document.getElementsByClassName('checkpro');
                 var l;
                 for (l = 0; l < k.length; l++) {
                     $(k[l]).attr('type', 'date');
                     $(k[l]).attr("disabled", false);
                 }
-                {#$(x).attr("disabled", false);#}
+
 
             }
         }
 
 
-        {#</script>#}
 
     </script>
 

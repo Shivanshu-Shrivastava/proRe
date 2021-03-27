@@ -18,7 +18,7 @@
                 <a href="extra" style="background-color:  rgb(69,43,141)" class="whitesm list-group-item   "><span
                         class=" sidecol text-justify">Acadmic Achievents and Awards</span></a>
             </div>
-            {#        <div class="d-flex flex-column my-5">#}
+         <!--   {#        <div class="d-flex flex-column my-5">#}
             {#           <div class="borderr py-2 hoverper">#}
             {#            <div class="  mx-3">#}
             {##}
@@ -27,7 +27,7 @@
             {#            </div>#}
             {#           </div>#}
             {##}
-            {#        </div>#}
+            {#        </div>#}-->
         </aside>
         <section class="col-md-9 my-4 col-sm-12">
             <div class="container">
@@ -41,7 +41,7 @@
                 {% with count=1 %}
                     {% for i in data %}
                         <div id="del{{ forloop.counter }}">
-                            {#            {{ count|add:'1' }}#}
+                          <!--  {#            {{ count|add:'1' }}#}-->
                             <div class="alert alert-warning" role="alert">
                                 <div class="d-flex justify-content-around row ">
                                     <div class="d-flex flex-column col col-md-2 ">
@@ -93,9 +93,9 @@
                                             <div class="container shadow-sm  rounded whitesm  mx-auto">
                                                 <form class=" d-flex flex-column flex-wrap" method="post"
                                                       action="extra/edit/{{ i.id }}">{% csrf_token %}
-{#                                                    <form class=" d-flex flex-column flex-wrap" method="post"><input#}
+{#                                                 <!--   <form class=" d-flex flex-column flex-wrap" method="post"><input#}
 {#                                                            type="hidden" name="csrfmiddlewaretoken"#}
-{#                                                            value="Ser8mJyFaKibPEO4NBnrZJyVqER6qNs6OOr6YKut0WdZo1is62vdIEjfteH9mf82">#}
+{#                                                            value="Ser8mJyFaKibPEO4NBnrZJyVqER6qNs6OOr6YKut0WdZo1is62vdIEjfteH9mf82">#}-->
 
 
                                                         <div id="div_id_achievement" class="form-group"><label

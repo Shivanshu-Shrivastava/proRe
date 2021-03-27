@@ -18,7 +18,7 @@
                         class="ml-3 sidecol text-justify">Projects</span></a>
                 <a href="extra" class="whitesm list-group-item  fullbox "><span class=" headcolor text-justify">Acadmic Achievents and Awards</span></a>
             </div>
-            {#        <div class="d-flex flex-column my-5">#}
+           <!--   {#        <div class="d-flex flex-column my-5">#}
             {#           <div class="borderr py-2 hoverper">#}
             {#            <div class="  mx-3">#}
             {##}
@@ -27,7 +27,7 @@
             {#            </div>#}
             {#           </div>#}
             {##}
-            {#        </div>#}
+            {#        </div>#}-->
         </aside>
         <section class="col-md-9 my-4 col-sm-12">
             <div class="container">
@@ -43,7 +43,7 @@
                 {% with count=1 %}
                     {% for i in data %}
                         <div id="del">
-                            {#            {{ count|add:'1' }}#}
+                          <!--    {#            {{ count|add:'1' }}#}-->
                             <div class="alert alert-warning" role="alert">
                                 <div class="d-flex justify-content-around flex-wrap ">
                                     <div class="d-flex flex-column justify-content-between flex-wrap ">
@@ -100,9 +100,9 @@
                                             <div class="container shadow-sm  rounded whitesm  mx-auto">
                                                 <form class="d-flex flex-wrap flex-column" method="post"
                                                       action="project/edit/{{ i.id }}">{% csrf_token %}
-{#                                                    <form class="d-flex flex-wrap flex-column" method="post"><input#}
+ <!-- {#                                                    <form class="d-flex flex-wrap flex-column" method="post"><input#}
 {#                                                            type="hidden" name="csrfmiddlewaretoken"#}
-{#                                                            value="ofSHv9YXHSnoK74DZJK4xplSPCuIlxEzkPSF7aULx4icjuy1iaSQgk6cSckLhZkv">#}
+{#                                                            value="ofSHv9YXHSnoK74DZJK4xplSPCuIlxEzkPSF7aULx4icjuy1iaSQgk6cSckLhZkv">#}-->
 
 
                                                         <div id="div_id_project" class="form-group"><label
@@ -199,14 +199,14 @@
                                                            name="projlink"
                                                            placeholder="Optional"
                                                            type="url"></div>-->
-{#                                                    <div class="align-self-center ">#}
+ <!-- {#                                                    <div class="align-self-center ">#}
 {#                                                        <button class="butn butn-bg px-3 py-2"#}
 {#                                                                style="border-radius: 1rem;"#}
 {#                                                                type="submit">#}
 {#                                                            <span> Save</span>#}
 {#                                                        </button>#}
 {#                                                    </div>#}
-{#                                                </form>#}
+{#                                                </form>#}-->
                                             </div>
                                         </div>
                                     </div>
@@ -292,9 +292,7 @@
         </section>
     </main>
     <script>
-        {#var c=document.getElementsByClassName('checkbox');#}
-        {#var i;#}
-        {#for (i=0;i<c.length;i++){#}
+
 
 
         function chapre(obj) {
@@ -313,14 +311,14 @@
 
             } else {
                 //when not checked
-                {#$(x).attr('type', 'date');#}
+
                 var k = document.getElementsByClassName('checkpro');
                 var l;
                 for (l = 0; l < k.length; l++) {
                     $(k[l]).attr('type', 'date');
                     $(k[l]).attr("disabled", false);
                 }
-                {#$(x).attr("disabled", false);#}
+
 
             }
         }
