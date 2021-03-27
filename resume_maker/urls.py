@@ -5,6 +5,8 @@ urlpatterns = [
     path('site', views.render_page, name='res'),
     path('start', views.personal_det),
     path('getinput', views.get_input, name='input'),
+    path('getinput/<int:id>/', views.getipdel),
+    path('getinput/edit/<int:id>',views.getipedit),
     # path('getinput/<int:id>', views.getdel),
     # path('getinput/edit/<int:id>', views.getedit),
     path('education', views.edu, name='Education'),
